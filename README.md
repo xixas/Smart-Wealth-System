@@ -2,7 +2,7 @@
 
 A comprehensive, interactive financial planning tool designed specifically for Indian investors. This single-page web application helps you build and manage wealth through a systematic, goal-based approach.
 
-**🚀 [Live Demo](https://yourusername.github.io/Smart-Wealth-System/)** _(Update this link after deployment)_
+**🚀 [Live Demo](https://xixas.github.io/Smart-Wealth-System/)**
 
 ---
 
