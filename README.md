@@ -11,12 +11,12 @@ A comprehensive, interactive financial planning tool designed specifically for I
 ### 📚 Two-Phase Wealth System
 
 #### **Phase 1: Working Years (4-Level Waterfall System)**
-Money flows systematically through four levels, only advancing when each level is full:
+Money flows systematically through four levels, only advancing when each level is full. Each level has a specific **holding period purpose** for tax efficiency:
 
-- **L0 - Bank Buffer**: Immediate liquidity (₹50k or 1 month expenses)
-- **L1 - Emergency Fund**: 6 months expenses for unexpected events
-- **L2 - Goal-Based Savings**: Custom goals (vacation, car, house down payment)
-- **L3 - Long-Term Wealth**: Equity investments for retirement
+- **L0 - Bank Buffer**: Instant access for daily expenses and credit card bills
+- **L1 - Tax-Efficient Liquid Reserve**: Units aged 12+ months for 0% LTCG redemption (6 months expenses)
+- **L2 - Goal-Based Savings**: Custom goals with 1-5 year timeline (vacation, car, house down payment)
+- **L3 - Long-Term Wealth**: Equity investments for retirement (never touch until retirement)
 
 #### **Phase 2: Retirement (3-Bucket Strategy)**
 Protection against sequence-of-returns risk:
@@ -36,7 +36,7 @@ Protection against sequence-of-returns risk:
 
 - **SIP Calculator**: With annual step-up options
 - **Lump Sum Calculator**: One-time investment growth
-- **Emergency Fund Calculator**: Quick L0/L1 sizing
+- **L0 + L1 Calculator**: Quick liquid reserve sizing
 - **Time to Goal Calculator**: Plan your financial milestones
 - **ISR Corpus Calculator**: Retirement planning made easy
 
@@ -68,7 +68,7 @@ Protection against sequence-of-returns risk:
 
 ### Using the Live App
 
-1. Visit the [Live Demo](https://yourusername.github.io/Smart-Wealth-System/)
+1. Visit the [Live Demo](https://xixas.github.io/Smart-Wealth-System/)
 2. Start with the **📚 Guide** tab to understand the system
 3. Go to **🎯 Personalized Plan** and enter your details
 4. Review recommendations and start implementing!
@@ -77,7 +77,7 @@ Protection against sequence-of-returns risk:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/Smart-Wealth-System.git
+git clone https://github.com/xixas/Smart-Wealth-System.git
 
 # Navigate to the folder
 cd Smart-Wealth-System
@@ -101,6 +101,15 @@ Or simply double-click [index.html](index.html) to open it in your default brows
 
 ### The Waterfall Rule
 Money only flows to the next level when the current level is full. This ensures financial stability before taking risks.
+
+### The L0 + L1 Tax Efficiency Insight
+**L1 is NOT a traditional "emergency fund"** — it's a tax-efficient liquid reserve:
+- Pay most expenses via L0 cash or credit card
+- Credit card billing cycle gives you 30-45 days buffer
+- During this time, redeem L1 units (already aged 12+ months)
+- Result: Tax-free redemption (LTCG under ₹1.25L = 0%)
+
+**Medical emergencies** → Health Insurance (prerequisite, not L1)
 
 ### Goal-Based L2
 Unlike traditional emergency funds, L2 is **not a fixed amount**. It's the sum of your specific goals. No goals = ₹0 in L2.
@@ -153,7 +162,7 @@ The app recommends **SEBI fund categories**, not specific funds:
 This is a personal financial planning tool, but suggestions are welcome!
 
 ### Reporting Issues
-Found a bug or have a feature request? [Open an issue](https://github.com/yourusername/Smart-Wealth-System/issues)
+Found a bug or have a feature request? [Open an issue](https://github.com/xixas/Smart-Wealth-System/issues)
 
 ### Potential Enhancements
 - Inflation adjustment in retirement calculations
@@ -204,5 +213,5 @@ Questions or feedback? Open an issue on GitHub!
 
 - [📚 Project Context for Developers](CLAUDE.md)
 - [📊 View Source Code](index.html)
-- [🐛 Report Issues](https://github.com/yourusername/Smart-Wealth-System/issues)
-- [⭐ Star this project](https://github.com/yourusername/Smart-Wealth-System)
+- [🐛 Report Issues](https://github.com/xixas/Smart-Wealth-System/issues)
+- [⭐ Star this project](https://github.com/xixas/Smart-Wealth-System)
