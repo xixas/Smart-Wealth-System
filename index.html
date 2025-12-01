@@ -1,0 +1,3779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1=">
+    <title>Smart Wealth System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e4e4e4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e4e4e4;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Working Years Section */
+        .levels-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .level-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .level-card:hover {
+            transform: translateX(10px);
+        }
+
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .level-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .level-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .level-0 .level-number { background: #64748b; }
+        .level-1 .level-number { background: #22c55e; }
+        .level-2 .level-number { background: #3b82f6; }
+        .level-3 .level-number { background: #a855f7; }
+
+        .level-name h3 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .level-name span {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .level-target {
+            text-align: right;
+        }
+
+        .level-target .amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .progress-section {
+            margin-top: 15px;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+
+        .level-0 .progress-fill { background: linear-gradient(90deg, #64748b, #94a3b8); }
+        .level-1 .progress-fill { background: linear-gradient(90deg, #22c55e, #4ade80); }
+        .level-2 .progress-fill { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        .level-3 .progress-fill { background: linear-gradient(90deg, #a855f7, #c084fc); }
+
+        .progress-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            align-items: center;
+        }
+
+        .input-group label {
+            color: #94a3b8;
+            min-width: 80px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #e4e4e4;
+            font-size: 1rem;
+            max-width: 200px;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+
+        /* Flow Arrow */
+        .flow-arrow {
+            text-align: center;
+            padding: 10px;
+            color: #00d4ff;
+            font-size: 1.5rem;
+        }
+
+        /* Buckets Section */
+        .buckets-visual {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .bucket-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .bucket-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .bucket-1 .bucket-icon { background: linear-gradient(135deg, #22c55e, #4ade80); }
+        .bucket-2 .bucket-icon { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .bucket-3 .bucket-icon { background: linear-gradient(135deg, #a855f7, #c084fc); }
+
+        .bucket-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .bucket-card .purpose {
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .bucket-amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        /* Calculator Section */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .calc-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .calc-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #00d4ff;
+        }
+
+        .calc-input {
+            margin-bottom: 20px;
+        }
+
+        .calc-input label {
+            display: block;
+            margin-bottom: 8px;
+            color: #94a3b8;
+        }
+
+        .calc-input input, .calc-input select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #e4e4e4;
+            font-size: 1rem;
+        }
+
+        .calc-input input:focus, .calc-input select:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+
+        .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .calc-result {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .calc-result h4 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .result-value {
+            font-weight: bold;
+            color: #4ade80;
+        }
+
+        /* Summary Section */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .summary-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .summary-card h4 {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .summary-card .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        /* Rules Section */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .rule-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .rule-card.warning {
+            border-left-color: #f59e0b;
+        }
+
+        .rule-card.danger {
+            border-left-color: #ef4444;
+        }
+
+        .rule-card h4 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rule-card p {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* Personal Status */
+        .status-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .status-section h3 {
+            margin-bottom: 20px;
+            color: #00d4ff;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .status-item label {
+            color: #94a3b8;
+        }
+
+        .status-item span {
+            font-weight: bold;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #00d4ff, #7b2cbf);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00d4ff;
+            border: 3px solid #1a1a2e;
+        }
+
+        .timeline-item h4 {
+            color: #00d4ff;
+            margin-bottom: 8px;
+        }
+
+        .timeline-item p {
+            color: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .level-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .level-target {
+                text-align: left;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content.active {
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Guide Section Styles */
+        .guide-hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(123, 44, 191, 0.1));
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .guide-hero h2 {
+            font-size: 2rem;
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .guide-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .guide-section h3 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .guide-content {
+            line-height: 1.8;
+        }
+
+        .guide-content p {
+            margin-bottom: 15px;
+            color: #cbd5e1;
+        }
+
+        .concept-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .concept-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .concept-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .concept-card h4 {
+            color: #e4e4e4;
+            margin-bottom: 10px;
+        }
+
+        .concept-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* Level Explainer */
+        .level-explainer {
+            margin-top: 20px;
+        }
+
+        .level-explain-card {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid;
+        }
+
+        .level-explain-card.l0 { border-left-color: #64748b; }
+        .level-explain-card.l1 { border-left-color: #22c55e; }
+        .level-explain-card.l2 { border-left-color: #3b82f6; }
+        .level-explain-card.l3 { border-left-color: #a855f7; }
+
+        .level-badge {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .l0 .level-badge { background: #64748b; }
+        .l1 .level-badge { background: #22c55e; }
+        .l2 .level-badge { background: #3b82f6; }
+        .l3 .level-badge { background: #a855f7; }
+
+        .level-info h4 {
+            color: #e4e4e4;
+            margin-bottom: 10px;
+        }
+
+        .level-info p {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .flow-down {
+            text-align: center;
+            color: #00d4ff;
+            padding: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Bucket Explainer */
+        .bucket-explainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .bucket-explain-card {
+            padding: 25px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-top: 4px solid;
+        }
+
+        .bucket-explain-card.b1 { border-top-color: #22c55e; }
+        .bucket-explain-card.b2 { border-top-color: #3b82f6; }
+        .bucket-explain-card.b3 { border-top-color: #a855f7; }
+
+        .bucket-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .b1 .bucket-badge { background: #22c55e; }
+        .b2 .bucket-badge { background: #3b82f6; }
+        .b3 .bucket-badge { background: #a855f7; }
+
+        .bucket-info h4 {
+            color: #e4e4e4;
+            margin-bottom: 12px;
+        }
+
+        .bucket-info p {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .formula {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .formula-label {
+            font-size: 1.3rem;
+            color: #00d4ff;
+        }
+
+        .formula-equals {
+            font-size: 1.5rem;
+            color: #64748b;
+        }
+
+        .formula-value {
+            font-size: 1.3rem;
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        /* Example Table */
+        .example-table {
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .example-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .example-row.header {
+            background: rgba(0, 212, 255, 0.1);
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .example-row:not(.header):nth-child(odd) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Usage Steps */
+        .usage-steps {
+            margin-top: 20px;
+        }
+
+        .usage-step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: #e4e4e4;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: #94a3b8;
+            margin-bottom: 0;
+        }
+
+        .step-content ul {
+            margin-top: 10px;
+            padding-left: 20px;
+            color: #94a3b8;
+        }
+
+        .step-content li {
+            margin-bottom: 5px;
+        }
+
+        /* Principles Grid */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .principle-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .principle-icon {
+            font-size: 1.5rem;
+        }
+
+        .principle-card p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        /* Start Button */
+        .start-button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .start-btn {
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Personalized Plan Styles */
+        .planner-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .planner-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .planner-input-section, .planner-output-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .planner-input-section h3, .planner-output-section h3 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .planner-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .form-group input, .form-group select {
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #e4e4e4;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+
+        .form-group small {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        .allocation-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .alloc-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 18px;
+            border-left: 4px solid;
+        }
+
+        .l0-alloc { border-left-color: #64748b; }
+        .l1-alloc { border-left-color: #22c55e; }
+        .l2-alloc { border-left-color: #3b82f6; }
+        .l3-alloc { border-left-color: #a855f7; }
+
+        .alloc-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .alloc-level {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .alloc-name {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .alloc-amount {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 5px;
+        }
+
+        .alloc-fund {
+            color: #4ade80;
+            font-size: 0.9rem;
+        }
+
+        .monthly-plan {
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .monthly-plan h4 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .flow-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .flow-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .flow-item.highlight {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 12px;
+            margin: 5px -12px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        .flow-value {
+            font-weight: bold;
+        }
+
+        .flow-value.positive { color: #4ade80; }
+        .flow-value.negative { color: #f87171; }
+
+        /* Tax Recommendations */
+        .tax-recommendations {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .tax-recommendations h3 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+
+        .tax-info-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .tax-info-box h4 {
+            color: #4ade80;
+            margin-bottom: 12px;
+        }
+
+        .tax-info-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tax-info-box li {
+            padding: 6px 0;
+            color: #cbd5e1;
+        }
+
+        .tax-bracket-display {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 212, 255, 0.1);
+            padding: 12px 25px;
+            border-radius: 30px;
+            margin-bottom: 25px;
+        }
+
+        .bracket-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .fund-reco-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .fund-reco-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border-top: 3px solid;
+        }
+
+        .fund-reco-card.recommended { border-top-color: #22c55e; }
+        .fund-reco-card.acceptable { border-top-color: #f59e0b; }
+        .fund-reco-card.avoid { border-top-color: #ef4444; }
+
+        .fund-reco-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .fund-reco-card .badge {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .badge.best { background: #22c55e; color: white; }
+        .badge.ok { background: #f59e0b; color: white; }
+        .badge.no { background: #ef4444; color: white; }
+
+        .fund-reco-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .fund-reco-card .tax-rate {
+            color: #e4e4e4;
+            font-weight: bold;
+        }
+
+        /* Tax Comparison Table */
+        .tax-comparison-section {
+            margin-top: 30px;
+        }
+
+        .tax-comparison-section h4 {
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .tax-table {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .tax-row {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            align-items: center;
+        }
+
+        .tax-row.header {
+            background: rgba(0, 212, 255, 0.1);
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .tax-row .winner {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .tax-note {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* Detailed Fund Categories */
+        .detailed-funds {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .detailed-funds h3 {
+            color: #00d4ff;
+            margin-bottom: 25px;
+        }
+
+        .fund-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .fund-category {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .cat-header {
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cat-header.emergency { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.05)); }
+        .cat-header.medium { background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.05)); }
+        .cat-header.longterm { background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.05)); }
+
+        .cat-icon {
+            font-size: 1.5rem;
+        }
+
+        .cat-header h4 {
+            color: #e4e4e4;
+            margin: 0;
+        }
+
+        .cat-body {
+            padding: 20px;
+        }
+
+        .cat-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .cat-body li {
+            padding: 5px 0;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        .recommended-for, .not-recommended {
+            margin-bottom: 15px;
+        }
+
+        .recommended-for strong { color: #4ade80; }
+        .not-recommended strong { color: #f87171; }
+
+        .cat-note {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .cat-note strong { color: #00d4ff; }
+
+        /* Tax Rules Summary */
+        .tax-rules-summary {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .tax-rules-summary h3 {
+            color: #00d4ff;
+            margin-bottom: 25px;
+        }
+
+        .new-slabs-table {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .new-slabs-table h4 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .slab-grid {
+            display: grid;
+            gap: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .slab-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slab-row.header {
+            background: rgba(0, 212, 255, 0.1);
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .slab-row:nth-child(odd):not(.header) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .rate-free {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .rate-high {
+            color: #f87171;
+            font-weight: bold;
+        }
+
+        .slab-note {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin: 8px 0;
+        }
+
+        .rules-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .rule-summary-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border-top: 3px solid;
+        }
+
+        .rule-summary-card.equity { border-top-color: #22c55e; }
+        .rule-summary-card.debt { border-top-color: #f59e0b; }
+        .rule-summary-card.hybrid { border-top-color: #3b82f6; }
+
+        .rule-summary-card h4 {
+            margin-bottom: 15px;
+            color: #e4e4e4;
+        }
+
+        .rule-details p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .elss-warning {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .elss-warning h4 {
+            color: #f87171;
+            margin-bottom: 10px;
+        }
+
+        .elss-warning p {
+            color: #cbd5e1;
+        }
+
+        /* Wealth Projection */
+        .wealth-projection {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(123, 44, 191, 0.1));
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .wealth-projection h3 {
+            color: #00d4ff;
+            margin-bottom: 25px;
+        }
+
+        .projection-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .projection-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .projection-card.highlight {
+            background: rgba(0, 212, 255, 0.15);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .proj-label {
+            display: block;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .proj-value {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .projection-card.highlight .proj-value {
+            font-size: 2rem;
+        }
+
+        /* Asset Allocation Guide */
+        .asset-allocation-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .asset-allocation-section h3 {
+            color: #a855f7;
+            margin-bottom: 10px;
+        }
+
+        .allocation-models {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .model-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .model-header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .model-card.conservative .model-header { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.05)); }
+        .model-card.moderate .model-header { background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.05)); }
+        .model-card.aggressive .model-header { background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.05)); }
+
+        .model-header h4 { margin: 0; color: #e4e4e4; }
+        .model-tag {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #94a3b8;
+        }
+
+        .model-body {
+            padding: 20px;
+        }
+
+        .allocation-bar {
+            display: flex;
+            height: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .bar-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .bar-segment.large { background: #3b82f6; }
+        .bar-segment.flexi { background: #8b5cf6; }
+        .bar-segment.mid { background: #f59e0b; }
+        .bar-segment.small { background: #ef4444; }
+        .bar-segment.intl { background: #22c55e; }
+
+        .model-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .model-body li {
+            padding: 5px 0;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* L3 Rules Section */
+        .l3-rules-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .l3-rules-section h4 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .rule-item {
+            display: flex;
+            gap: 12px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .rule-item.do { border-left: 3px solid #22c55e; }
+        .rule-item.dont { border-left: 3px solid #ef4444; }
+
+        .rule-icon { font-size: 1.2rem; }
+        .rule-item strong { color: #e4e4e4; display: block; margin-bottom: 5px; }
+        .rule-item p { color: #94a3b8; margin: 0; font-size: 0.9rem; }
+
+        /* Goal Planner */
+        .goal-planner-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .goal-planner-section h3 {
+            color: #3b82f6;
+            margin-bottom: 10px;
+        }
+
+        .goal-input-form {
+            margin-bottom: 20px;
+        }
+
+        .goal-inputs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .goal-inputs input, .goal-inputs select {
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #e4e4e4;
+            font-size: 1rem;
+        }
+
+        .goal-inputs input[type="text"] { flex: 2; min-width: 150px; }
+        .goal-inputs input[type="number"] { flex: 1; min-width: 120px; }
+        .goal-inputs select { flex: 1; min-width: 100px; }
+
+        .add-goal-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-goal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .goals-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .goal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .goal-info { display: flex; gap: 20px; align-items: center; }
+        .goal-name { font-weight: bold; color: #e4e4e4; }
+        .goal-details { color: #94a3b8; font-size: 0.9rem; }
+
+        .goal-remove {
+            background: rgba(239, 68, 68, 0.2);
+            border: none;
+            color: #f87171;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .goal-summary {
+            display: flex;
+            gap: 30px;
+            padding: 20px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .goal-total, .goal-monthly {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .goal-total span:first-child, .goal-monthly span:first-child {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .goal-total-amount, .goal-monthly-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .goal-note {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px 20px;
+            border-radius: 10px;
+        }
+
+        .goal-note strong { color: #f59e0b; }
+        .goal-note ul { margin: 10px 0 0 20px; color: #94a3b8; }
+        .goal-note li { padding: 3px 0; }
+
+        /* ISR Options */
+        .isr-options-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .isr-options-section h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .isr-selector {
+            margin-bottom: 25px;
+        }
+
+        .isr-selector label {
+            display: block;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        .isr-selector select {
+            padding: 12px 20px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #e4e4e4;
+            font-size: 1rem;
+            min-width: 350px;
+        }
+
+        .isr-explanation {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .isr-explanation { grid-template-columns: 1fr; }
+        }
+
+        .isr-card {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .isr-card h4 { color: #00d4ff; margin-bottom: 15px; }
+        .isr-formula { color: #94a3b8; margin-bottom: 10px; }
+        .isr-result { font-size: 1.3rem; font-weight: bold; color: #4ade80; }
+
+        .isr-warning {
+            background: rgba(239, 68, 68, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .isr-warning strong { color: #f87171; display: block; margin-bottom: 10px; }
+        .isr-warning ul { margin: 0; padding-left: 20px; color: #cbd5e1; }
+        .isr-warning li { padding: 3px 0; }
+
+        /* Bucket Refill */
+        .bucket-refill-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .bucket-refill-section h3 {
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+
+        .refill-rules {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .refill-rule {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+        }
+
+        .refill-icon { font-size: 2rem; }
+        .refill-content h4 { color: #e4e4e4; margin-bottom: 10px; }
+        .refill-content p { color: #94a3b8; margin: 5px 0; font-size: 0.95rem; }
+
+        /* Cat link */
+        .cat-link {
+            font-size: 0.8rem;
+            color: #00d4ff;
+            text-decoration: none;
+            margin-left: auto;
+        }
+
+        .cat-link:hover { text-decoration: underline; }
+
+        /* Prerequisite Box */
+        .prerequisite-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .prerequisite-box h4 {
+            color: #f87171;
+            margin-bottom: 15px;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 8px 0;
+            color: #cbd5e1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .prerequisite-box li:last-child {
+            border-bottom: none;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+
+        .tooltip::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: #e4e4e4;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Smart Wealth System</h1>
+            <p>4 Levels to Build Wealth • 3 Buckets to Live From Wealth • ISR 17.5 Guarantees Lifetime Income</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="guide">📚 Guide</button>
+            <button class="tab-btn" data-tab="planner">🎯 Personalized Plan</button>
+            <button class="tab-btn" data-tab="working">📊 Working Years</button>
+            <button class="tab-btn" data-tab="retirement">🏖️ Retirement Buckets</button>
+            <button class="tab-btn" data-tab="calculator">🧮 Calculators</button>
+            <button class="tab-btn" data-tab="rules">📋 Rules</button>
+        </div>
+
+        <!-- Guide/Introduction Tab -->
+        <div id="guide" class="tab-content active">
+            <div class="guide-hero">
+                <h2>🎯 Welcome to the Smart Wealth System</h2>
+                <p class="hero-subtitle">A simple, proven framework to build wealth during working years and live comfortably in retirement</p>
+            </div>
+
+            <div class="guide-section">
+                <h3>📖 What is this System?</h3>
+                <div class="guide-content">
+                    <p>The Smart Wealth System is a <strong>two-phase financial framework</strong> designed for Indian middle-class professionals:</p>
+                    <div class="concept-cards">
+                        <div class="concept-card">
+                            <div class="concept-icon">🏗️</div>
+                            <h4>Phase 1: Building Wealth</h4>
+                            <p>During your working years, money flows through <strong>4 Levels</strong> — from a safe bank buffer up to long-term equity investments.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">🌴</div>
+                            <h4>Phase 2: Living from Wealth</h4>
+                            <p>At retirement, your corpus is divided into <strong>3 Buckets</strong> that protect you from market volatility while providing steady income.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>🏗️ The 4-Level System (Working Years)</h3>
+                <div class="guide-content">
+                    <div class="prerequisite-box">
+                        <h4>⚠️ Prerequisites Before Starting</h4>
+                        <ul>
+                            <li><strong>Term Insurance:</strong> ₹1-2 Cr cover (if you have dependents) — ~₹15-25k/year</li>
+                            <li><strong>Health Insurance:</strong> ₹25-50 Lakh family floater — ~₹25-40k/year</li>
+                            <li><strong>No High-Interest Debt:</strong> Pay off credit cards and personal loans first</li>
+                        </ul>
+                        <p style="margin-top: 10px; font-style: italic;">Without these, your wealth system has a critical vulnerability.</p>
+                    </div>
+                
+                    <p>Think of these levels as a <strong>waterfall</strong> — money only flows to the next level when the current one is full:</p>
+                    
+                    <div class="level-explainer">
+                        <div class="level-explain-card l0">
+                            <div class="level-badge">L0</div>
+                            <div class="level-info">
+                                <h4>Bank Buffer — Min ₹50k or 1 Month Expenses</h4>
+                                <p><strong>Purpose:</strong> Daily operations, small unexpected expenses</p>
+                                <p><strong>Where:</strong> Savings account</p>
+                                <p><strong>Rule:</strong> Always maintain this minimum. If monthly expenses > ₹50k, keep 1 month's worth.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flow-down">↓ Surplus flows down</div>
+                        
+                        <div class="level-explain-card l1">
+                            <div class="level-badge">L1</div>
+                            <div class="level-info">
+                                <h4>Emergency Fund — 6 Months Expenses</h4>
+                                <p><strong>Purpose:</strong> Job loss, deductibles, urgent repairs (not major medical — that's insurance)</p>
+                                <p><strong>Where:</strong> Arbitrage Fund (15%+ bracket) or Liquid Fund (lower brackets)</p>
+                                <p><strong>Rule:</strong> Only use for genuine emergencies. Rebuild immediately after use.</p>
+                                <p><strong>⚠️ Note:</strong> Arbitrage STCG is 20% if held < 12 months. Plan for 12+ month holding.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flow-down">↓ After L1 is full</div>
+                        
+                        <div class="level-explain-card l2">
+                            <div class="level-badge">L2</div>
+                            <div class="level-info">
+                                <h4>Goal-Based Savings — Based on Your Goals</h4>
+                                <p><strong>Purpose:</strong> Specific planned goals (car, vacation, wedding) with 1-5 year timeline</p>
+                                <p><strong>Where:</strong> Arbitrage (1-2yr), Equity Savings (2-3yr), Balanced Advantage (3-5yr)</p>
+                                <p><strong>Rule:</strong> No goals = No L2 needed. Money goes straight to L3.</p>
+                                <p><strong>Key:</strong> L2 = Sum of your specific goals. Use the Goal Planner to calculate.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flow-down">↓ After L2 goals are funded</div>
+                        
+                        <div class="level-explain-card l3">
+                            <div class="level-badge">L3</div>
+                            <div class="level-info">
+                                <h4>Long-Term Wealth — All Remaining Surplus</h4>
+                                <p><strong>Purpose:</strong> Retirement corpus, financial freedom</p>
+                                <p><strong>Where:</strong> Equity SIPs (Large Cap + Flexi Cap + Mid/Small Cap)</p>
+                                <p><strong>Rules:</strong></p>
+                                <ul style="margin-left: 20px; color: #94a3b8;">
+                                    <li>✅ Tax harvest ₹1.25L LTCG annually (March)</li>
+                                    <li>✅ Rebalance if allocation drifts >10%</li>
+                                    <li>✅ Step-up SIPs 10-15% yearly</li>
+                                    <li>❌ Never redeem for consumption before retirement</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>🪣 The 3-Bucket System (Retirement)</h3>
+                <div class="guide-content">
+                    <p>When you retire, reorganize your corpus into <strong>3 buckets</strong> to protect against market crashes:</p>
+                    
+                    <div class="bucket-explainer">
+                        <div class="bucket-explain-card b1">
+                            <div class="bucket-badge">B1</div>
+                            <div class="bucket-info">
+                                <h4>Spending Bucket — 3 Years Expenses</h4>
+                                <p><strong>What:</strong> Arbitrage/Liquid funds</p>
+                                <p><strong>How:</strong> Set up monthly SWP (Systematic Withdrawal Plan)</p>
+                                <p><strong>Why:</strong> Even if market crashes, you have 3 years of safe income</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bucket-explain-card b2">
+                            <div class="bucket-badge">B2</div>
+                            <div class="bucket-info">
+                                <h4>Stability Bucket — 3 Years Expenses</h4>
+                                <p><strong>What:</strong> Debt/Hybrid funds</p>
+                                <p><strong>How:</strong> Refills Bucket 1 when it depletes</p>
+                                <p><strong>Why:</strong> Low volatility, preserves capital</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bucket-explain-card b3">
+                            <div class="bucket-badge">B3</div>
+                            <div class="bucket-info">
+                                <h4>Growth Bucket — Remaining Corpus</h4>
+                                <p><strong>What:</strong> Equity funds</p>
+                                <p><strong>How:</strong> Refills Bucket 2 during market highs</p>
+                                <p><strong>Why:</strong> Keeps growing to beat inflation long-term</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <strong>💡 The Magic:</strong> With 6 years of expenses in safe buckets (B1 + B2), you never have to sell equity during a market crash. You wait for recovery, then refill from B3.
+                    </div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>📐 The ISR Formula</h3>
+                <div class="guide-content">
+                    <div class="formula-box">
+                        <div class="formula">
+                            <span class="formula-label">Required Corpus</span>
+                            <span class="formula-equals">=</span>
+                            <span class="formula-value">Annual Expense × 17.5</span>
+                        </div>
+                    </div>
+                    
+                    <p><strong>ISR (Income to Savings Ratio) of 17.5</strong> means you can safely withdraw ~5.7% annually forever.</p>
+                    
+                    <div class="example-table">
+                        <div class="example-row header">
+                            <span>Monthly Need</span>
+                            <span>Annual Need</span>
+                            <span>Required Corpus</span>
+                        </div>
+                        <div class="example-row">
+                            <span>₹1 Lakh</span>
+                            <span>₹12 Lakh</span>
+                            <span>₹2.1 Crore</span>
+                        </div>
+                        <div class="example-row">
+                            <span>₹1.5 Lakh</span>
+                            <span>₹18 Lakh</span>
+                            <span>₹3.15 Crore</span>
+                        </div>
+                        <div class="example-row">
+                            <span>₹2 Lakh</span>
+                            <span>₹24 Lakh</span>
+                            <span>₹4.2 Crore</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>🛠️ How to Use This Tool</h3>
+                <div class="guide-content">
+                    <div class="usage-steps">
+                        <div class="usage-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>🎯 Personalized Plan Tab</h4>
+                                <p>Enter your income, expenses, and tax bracket to get customized recommendations on how much to keep in each level and which fund types are most tax-efficient for you.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="usage-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>📊 Working Years Tab</h4>
+                                <p>Enter your current amounts in each level. Watch the progress bars fill up. The tool calculates your total tracked wealth and overall progress automatically.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="usage-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>🏖️ Retirement Buckets Tab</h4>
+                                <p>Enter your expected monthly expense and total corpus. See exactly how your retirement money should be divided across the 3 buckets.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="usage-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>🧮 Calculators Tab</h4>
+                                <ul>
+                                    <li><strong>ISR Calculator:</strong> Find out how much corpus you need</li>
+                                    <li><strong>SIP Calculator:</strong> Project your SIP growth with annual step-up option</li>
+                                    <li><strong>Lump Sum Calculator:</strong> Calculate growth of one-time investments</li>
+                                    <li><strong>Emergency Fund:</strong> Calculate ideal emergency fund size</li>
+                                    <li><strong>Time to Goal:</strong> See how long to reach any target</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="usage-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>📋 Rules Tab</h4>
+                                <p>Quick reference for all the golden rules. Review this whenever you're tempted to break the system!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>✨ Key Principles to Remember</h3>
+                <div class="principles-grid">
+                    <div class="principle-card">
+                        <span class="principle-icon">🌊</span>
+                        <p><strong>Flow like water:</strong> Money moves L0 → L1 → L2 → L3. Never skip levels.</p>
+                    </div>
+                    <div class="principle-card">
+                        <span class="principle-icon">🔒</span>
+                        <p><strong>Protect L3:</strong> Your equity SIPs are sacred. Never touch before retirement.</p>
+                    </div>
+                    <div class="principle-card">
+                        <span class="principle-icon">🔄</span>
+                        <p><strong>Rebuild fast:</strong> If you use L1/L2, refill them before adding to L3.</p>
+                    </div>
+                    <div class="principle-card">
+                        <span class="principle-icon">📈</span>
+                        <p><strong>Stay consistent:</strong> SIP discipline beats timing the market every time.</p>
+                    </div>
+                    <div class="principle-card">
+                        <span class="principle-icon">🎯</span>
+                        <p><strong>Know your number:</strong> Use ISR 17.5 to calculate your retirement corpus target.</p>
+                    </div>
+                    <div class="principle-card">
+                        <span class="principle-icon">🛡️</span>
+                        <p><strong>Bucket safety:</strong> 6 years in safe buckets = peace of mind in retirement.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="start-button-container">
+                <button class="start-btn" onclick="document.querySelector('[data-tab=planner]').click()">
+                    Get Your Personalized Plan →
+                </button>
+            </div>
+        </div>
+
+        <!-- Personalized Plan Tab -->
+        <div id="planner" class="tab-content">
+            <div class="guide-hero">
+                <h2>🎯 Your Personalized Financial Plan</h2>
+                <p class="hero-subtitle">Enter your details to get tax-efficient fund recommendations based on the New Tax Regime (FY 2025-26, effective April 2025)</p>
+            </div>
+
+            <div class="planner-grid">
+                <!-- Input Section -->
+                <div class="planner-input-section">
+                    <h3>📝 Your Financial Details</h3>
+                    
+                    <div class="planner-form">
+                        <div class="form-group">
+                            <label>Monthly In-Hand Salary (₹)</label>
+                            <input type="number" id="plan-salary" value="100000" oninput="generatePlan()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Monthly Expenses (₹)</label>
+                            <input type="number" id="plan-expenses" value="50000" oninput="generatePlan()">
+                            <small>Include rent, bills, groceries, EMIs, etc.</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Annual Income (for tax bracket) - FY 2025-26</label>
+                            <select id="plan-tax-bracket" onchange="generatePlan()">
+                                <option value="0">Up to ₹12 Lakh (0% - Rebate u/s 87A)</option>
+                                <option value="5">₹12-16 Lakh (5-15% effective)</option>
+                                <option value="15">₹16-20 Lakh (15-20% effective)</option>
+                                <option value="20">₹20-24 Lakh (20-25% effective)</option>
+                                <option value="25">₹24-30 Lakh (25-30%)</option>
+                                <option value="30" selected>Above ₹30 Lakh (30%)</option>
+                            </select>
+                            <small>New Tax Regime FY 2025-26 (from April 2025)</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Current Age</label>
+                            <input type="number" id="plan-age" value="30" min="18" max="70" oninput="generatePlan()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Target Retirement Age</label>
+                            <input type="number" id="plan-retire-age" value="50" min="35" max="70" oninput="generatePlan()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Existing Investments (₹)</label>
+                            <input type="number" id="plan-existing" value="0" oninput="generatePlan()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations Section -->
+                <div class="planner-output-section">
+                    <h3>💡 Your Recommended Allocation</h3>
+                    
+                    <div class="allocation-cards">
+                        <div class="alloc-card l0-alloc">
+                            <div class="alloc-header">
+                                <span class="alloc-level">L0</span>
+                                <span class="alloc-name">Bank Buffer</span>
+                            </div>
+                            <div class="alloc-amount" id="alloc-l0">₹50,000</div>
+                            <div class="alloc-fund" id="fund-l0">Savings Account</div>
+                        </div>
+                        
+                        <div class="alloc-card l1-alloc">
+                            <div class="alloc-header">
+                                <span class="alloc-level">L1</span>
+                                <span class="alloc-name">Emergency Fund</span>
+                            </div>
+                            <div class="alloc-amount" id="alloc-l1">₹3,00,000</div>
+                            <div class="alloc-fund" id="fund-l1">Arbitrage Fund</div>
+                        </div>
+                        
+                        <div class="alloc-card l2-alloc" onclick="scrollToSection('goal-planner')" style="cursor: pointer;">
+                            <div class="alloc-header">
+                                <span class="alloc-level">L2</span>
+                                <span class="alloc-name">Goal-Based Savings</span>
+                            </div>
+                            <div class="alloc-amount" id="alloc-l2">₹0 (No goals)</div>
+                            <div class="alloc-fund" id="fund-l2">Add goals below ↓</div>
+                        </div>
+                        
+                        <div class="alloc-card l3-alloc" onclick="scrollToSection('asset-allocation-guide')" style="cursor: pointer;">
+                            <div class="alloc-header">
+                                <span class="alloc-level">L3</span>
+                                <span class="alloc-name">Long-Term SIPs</span>
+                            </div>
+                            <div class="alloc-amount" id="alloc-l3">₹50,000/mo</div>
+                            <div class="alloc-fund" id="fund-l3">See allocation guide ↓</div>
+                        </div>
+                    </div>
+                    
+                    <div class="monthly-plan">
+                        <h4>📊 Monthly Money Flow</h4>
+                        <div class="flow-breakdown">
+                            <div class="flow-item">
+                                <span>Income</span>
+                                <span class="flow-value positive" id="flow-income">₹1,00,000</span>
+                            </div>
+                            <div class="flow-item">
+                                <span>Expenses</span>
+                                <span class="flow-value negative" id="flow-expenses">- ₹50,000</span>
+                            </div>
+                            <div class="flow-item highlight">
+                                <span>Monthly Surplus</span>
+                                <span class="flow-value positive" id="flow-surplus">₹50,000</span>
+                            </div>
+                            <div class="flow-item">
+                                <span>Recommended SIP</span>
+                                <span class="flow-value" id="flow-sip">₹40,000</span>
+                            </div>
+                            <div class="flow-item">
+                                <span>Buffer Building</span>
+                                <span class="flow-value" id="flow-buffer">₹10,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tax-Efficient Fund Recommendations -->
+            <div class="tax-recommendations">
+                <h3>🏦 Tax-Efficient Fund Recommendations (New Tax Regime FY 2025-26)</h3>
+                
+                <div class="tax-info-box">
+                    <h4>📢 Budget 2025 Key Changes</h4>
+                    <ul>
+                        <li>✅ Income up to <strong>₹12 Lakh is TAX-FREE</strong> (Section 87A rebate ₹60,000)</li>
+                        <li>✅ Salaried: Up to <strong>₹12.75 Lakh tax-free</strong> (₹75k standard deduction)</li>
+                        <li>✅ New slabs: 0% → 5% → 10% → 15% → 20% → 25% → 30%</li>
+                        <li>✅ 30% rate now starts at ₹24 Lakh (was ₹15 Lakh)</li>
+                    </ul>
+                </div>
+                
+                <div class="tax-bracket-display">
+                    <span>Your Tax Bracket:</span>
+                    <span class="bracket-value" id="display-bracket">30%</span>
+                </div>
+
+                <div class="fund-reco-grid" id="fund-recommendations">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+                
+                <div class="tax-comparison-section">
+                    <h4>📊 Tax Impact Comparison (₹1 Lakh investment, 7% return, 1+ year holding)</h4>
+                    <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 15px;">Note: For income up to ₹12L, all options are effectively tax-free due to Section 87A rebate.</p>
+                    <div class="tax-table">
+                        <div class="tax-row header">
+                            <span>Fund Type</span>
+                            <span>Pre-Tax Return</span>
+                            <span>Tax Rate</span>
+                            <span>Post-Tax Return</span>
+                            <span>You Keep</span>
+                        </div>
+                        <div class="tax-row" id="tax-row-arb">
+                            <span>Arbitrage Fund</span>
+                            <span>₹7,000</span>
+                            <span>0%*</span>
+                            <span>₹7,000</span>
+                            <span class="winner">₹1,07,000</span>
+                        </div>
+                        <div class="tax-row" id="tax-row-liquid">
+                            <span>Liquid Fund</span>
+                            <span>₹7,000</span>
+                            <span>30%</span>
+                            <span>₹4,900</span>
+                            <span>₹1,04,900</span>
+                        </div>
+                        <div class="tax-row" id="tax-row-debt">
+                            <span>Debt Fund</span>
+                            <span>₹7,000</span>
+                            <span>30%</span>
+                            <span>₹4,900</span>
+                            <span>₹1,04,900</span>
+                        </div>
+                        <div class="tax-row" id="tax-row-fd">
+                            <span>Bank FD</span>
+                            <span>₹7,000</span>
+                            <span>30%</span>
+                            <span>₹4,900</span>
+                            <span>₹1,04,900</span>
+                        </div>
+                    </div>
+                    <p class="tax-note">*Arbitrage LTCG is tax-free up to ₹1.25 Lakh combined annual gains. Above that: 12.5%</p>
+                </div>
+            </div>
+
+            <!-- Detailed Fund Categories -->
+            <div class="detailed-funds" id="fund-categories-guide">
+                <h3>📋 SEBI Fund Categories by Purpose</h3>
+                <p style="color: #94a3b8; margin-bottom: 20px;">Select funds from these SEBI-defined categories. Always check: AUM > ₹1,000 Cr, Expense Ratio < 1%, and consistent track record.</p>
+                
+                <div class="fund-category-grid">
+                    <div class="fund-category" id="cat-emergency">
+                        <div class="cat-header emergency">
+                            <span class="cat-icon">🛡️</span>
+                            <h4>Emergency Fund (L1)</h4>
+                        </div>
+                        <div class="cat-body">
+                            <div class="recommended-for">
+                                <strong>For 15%+ Tax Bracket:</strong>
+                                <ul>
+                                    <li>✅ <strong>Arbitrage Funds</strong> (SEBI: Hybrid) - Tax-free LTCG up to ₹1.25L</li>
+                                    <li>✅ <strong>Overnight Funds</strong> (SEBI: Debt) - For 1 month instant access portion</li>
+                                </ul>
+                            </div>
+                            <div class="not-recommended">
+                                <strong>For 0-10% Bracket:</strong>
+                                <ul>
+                                    <li>✅ <strong>Liquid Funds</strong> (SEBI: Debt) - Simple, tax impact minimal</li>
+                                    <li>✅ <strong>Overnight Funds</strong> (SEBI: Debt) - Zero credit risk</li>
+                                </ul>
+                            </div>
+                            <div class="cat-note">
+                                <strong>⚠️ STCG Note:</strong> If you redeem arbitrage within 12 months, tax is 20% (not 0%). Plan for 12+ month holding.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fund-category" id="cat-medium">
+                        <div class="cat-header medium">
+                            <span class="cat-icon">📅</span>
+                            <h4>Goal-Based Savings (L2)</h4>
+                        </div>
+                        <div class="cat-body">
+                            <div class="recommended-for">
+                                <strong>Based on Goal Timeline:</strong>
+                                <ul>
+                                    <li>✅ <strong>1-2 Years:</strong> Arbitrage Funds (SEBI: Hybrid)</li>
+                                    <li>✅ <strong>2-3 Years:</strong> Equity Savings Funds (SEBI: Hybrid, 65%+ equity)</li>
+                                    <li>✅ <strong>3-5 Years:</strong> Balanced Advantage / Dynamic Asset Allocation (SEBI: Hybrid)</li>
+                                </ul>
+                            </div>
+                            <div class="not-recommended">
+                                <strong>Avoid for Goals:</strong>
+                                <ul>
+                                    <li>❌ Conservative Hybrid (<65% equity) - Taxed at slab rate</li>
+                                    <li>❌ Pure Debt Funds - No tax advantage since 2023</li>
+                                </ul>
+                            </div>
+                            <div class="cat-note">
+                                <strong>Key:</strong> L2 = Sum of your specific goals. No goals? L2 = ₹0, money goes to L3.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fund-category" id="cat-longterm">
+                        <div class="cat-header longterm">
+                            <span class="cat-icon">🚀</span>
+                            <h4>Long-Term Wealth (L3)</h4>
+                            <a href="#asset-allocation-guide" class="cat-link" onclick="scrollToSection('asset-allocation-guide')">📖 See Allocation Guide</a>
+                        </div>
+                        <div class="cat-body">
+                            <div class="recommended-for">
+                                <strong>SEBI Equity Categories (pick 2-3):</strong>
+                                <ul>
+                                    <li>✅ <strong>Large Cap / Index Funds</strong> - Core 50-60% (Low cost, market returns)</li>
+                                    <li>✅ <strong>Flexi Cap Funds</strong> - 20-30% (Active across market caps)</li>
+                                    <li>✅ <strong>Mid Cap / Small Cap</strong> - 10-20% (Higher risk, higher return potential)</li>
+                                    <li>✅ <strong>International / Fund of Funds</strong> - 10-15% (Geographic diversification)</li>
+                                </ul>
+                            </div>
+                            <div class="not-recommended">
+                                <strong>Avoid under New Tax Regime:</strong>
+                                <ul>
+                                    <li>❌ ELSS (SEBI: Equity) - 3-year lock-in, no 80C benefit</li>
+                                    <li>❌ Sectoral/Thematic - Too concentrated, timing dependent</li>
+                                </ul>
+                            </div>
+                            <div class="cat-note">
+                                <strong>Annual Actions:</strong> (1) Tax harvest ₹1.25L gains, (2) Rebalance if allocation drifts >10%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tax Rules Summary -->
+            <div class="tax-rules-summary">
+                <h3>📜 Quick Tax Rules Reference (FY 2025-26)</h3>
+                
+                <div class="new-slabs-table">
+                    <h4>New Tax Regime Slabs (w.e.f. April 1, 2025)</h4>
+                    <div class="slab-grid">
+                        <div class="slab-row header">
+                            <span>Income Range</span>
+                            <span>Tax Rate</span>
+                        </div>
+                        <div class="slab-row">
+                            <span>Up to ₹4 Lakh</span>
+                            <span class="rate-free">0% (NIL)</span>
+                        </div>
+                        <div class="slab-row">
+                            <span>₹4 - ₹8 Lakh</span>
+                            <span>5%</span>
+                        </div>
+                        <div class="slab-row">
+                            <span>₹8 - ₹12 Lakh</span>
+                            <span>10%</span>
+                        </div>
+                        <div class="slab-row">
+                            <span>₹12 - ₹16 Lakh</span>
+                            <span>15%</span>
+                        </div>
+                        <div class="slab-row">
+                            <span>₹16 - ₹20 Lakh</span>
+                            <span>20%</span>
+                        </div>
+                        <div class="slab-row">
+                            <span>₹20 - ₹24 Lakh</span>
+                            <span>25%</span>
+                        </div>
+                        <div class="slab-row">
+                            <span>Above ₹24 Lakh</span>
+                            <span class="rate-high">30%</span>
+                        </div>
+                    </div>
+                    <p class="slab-note">💡 Section 87A Rebate: ₹60,000 for income up to ₹12 Lakh = Effectively 0% tax</p>
+                    <p class="slab-note">💡 Salaried: Standard Deduction ₹75,000 → Income up to ₹12.75 Lakh = 0% tax</p>
+                </div>
+                
+                <div class="rules-cards">
+                    <div class="rule-summary-card equity">
+                        <h4>Equity & Arbitrage Funds</h4>
+                        <div class="rule-details">
+                            <p><strong>LTCG (>12 months):</strong> 12.5% above ₹1.25L</p>
+                            <p><strong>STCG (≤12 months):</strong> 20% flat</p>
+                            <p><strong>Exemption:</strong> ₹1.25 Lakh/year (combined)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="rule-summary-card debt">
+                        <h4>Debt & Liquid Funds</h4>
+                        <div class="rule-details">
+                            <p><strong>All Gains:</strong> Taxed at your slab rate</p>
+                            <p><strong>No LTCG benefit</strong> for post-April 2023 investments</p>
+                            <p><strong>Same as FD</strong> - No advantage</p>
+                        </div>
+                    </div>
+                    
+                    <div class="rule-summary-card hybrid">
+                        <h4>Hybrid Funds</h4>
+                        <div class="rule-details">
+                            <p><strong>≥65% Equity:</strong> Equity taxation (12.5%/20%)</p>
+                            <p><strong>35-65% Equity:</strong> 12.5% after 24 months</p>
+                            <p><strong>&lt;35% Equity:</strong> Slab rate (like debt)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="elss-warning">
+                    <h4>⚠️ ELSS Under New Tax Regime</h4>
+                    <p>Section 80C deduction is <strong>NOT available</strong> under New Tax Regime. ELSS has a 3-year lock-in with <strong>no tax benefit</strong>. Use regular flexi-cap or index funds instead - same returns, no lock-in.</p>
+                </div>
+            </div>
+
+            <!-- Asset Allocation Guide -->
+            <div class="asset-allocation-section" id="asset-allocation-guide">
+                <h3>📊 L3 Asset Allocation Guide</h3>
+                <p style="color: #94a3b8; margin-bottom: 25px;">Your L3 equity allocation should be based on your risk tolerance and years to retirement. Here are model portfolios:</p>
+                
+                <div class="allocation-models">
+                    <div class="model-card conservative">
+                        <div class="model-header">
+                            <h4>🛡️ Conservative</h4>
+                            <span class="model-tag">5-10 years to goal</span>
+                        </div>
+                        <div class="model-body">
+                            <div class="allocation-bar">
+                                <div class="bar-segment large" style="width: 70%;">Large Cap 70%</div>
+                                <div class="bar-segment flexi" style="width: 20%;">Flexi 20%</div>
+                                <div class="bar-segment intl" style="width: 10%;">Intl 10%</div>
+                            </div>
+                            <ul>
+                                <li>Large Cap Index / Large Cap Fund: 70%</li>
+                                <li>Flexi Cap Fund: 20%</li>
+                                <li>International Fund of Funds: 10%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="model-card moderate">
+                        <div class="model-header">
+                            <h4>⚖️ Moderate</h4>
+                            <span class="model-tag">10-20 years to goal</span>
+                        </div>
+                        <div class="model-body">
+                            <div class="allocation-bar">
+                                <div class="bar-segment large" style="width: 50%;">Large 50%</div>
+                                <div class="bar-segment flexi" style="width: 25%;">Flexi 25%</div>
+                                <div class="bar-segment mid" style="width: 15%;">Mid 15%</div>
+                                <div class="bar-segment intl" style="width: 10%;">Intl 10%</div>
+                            </div>
+                            <ul>
+                                <li>Large Cap Index: 50%</li>
+                                <li>Flexi Cap Fund: 25%</li>
+                                <li>Mid Cap Fund: 15%</li>
+                                <li>International Fund of Funds: 10%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="model-card aggressive">
+                        <div class="model-header">
+                            <h4>🚀 Aggressive</h4>
+                            <span class="model-tag">20+ years to goal</span>
+                        </div>
+                        <div class="model-body">
+                            <div class="allocation-bar">
+                                <div class="bar-segment large" style="width: 40%;">Large 40%</div>
+                                <div class="bar-segment flexi" style="width: 25%;">Flexi 25%</div>
+                                <div class="bar-segment mid" style="width: 20%;">Mid 20%</div>
+                                <div class="bar-segment small" style="width: 15%;">Small 15%</div>
+                            </div>
+                            <ul>
+                                <li>Large Cap Index: 40%</li>
+                                <li>Flexi Cap Fund: 25%</li>
+                                <li>Mid Cap Fund: 20%</li>
+                                <li>Small Cap Fund: 15%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="l3-rules-section">
+                    <h4>📜 L3 Management Rules</h4>
+                    <div class="rules-grid">
+                        <div class="rule-item do">
+                            <span class="rule-icon">✅</span>
+                            <div>
+                                <strong>Annual Tax Harvesting (March)</strong>
+                                <p>Redeem units to realize up to ₹1.25L LTCG tax-free. Reinvest immediately. Saves ₹15,625/year.</p>
+                            </div>
+                        </div>
+                        <div class="rule-item do">
+                            <span class="rule-icon">✅</span>
+                            <div>
+                                <strong>Annual Rebalancing</strong>
+                                <p>If any fund drifts >10% from target allocation, rebalance. Use tax harvesting opportunity to rebalance.</p>
+                            </div>
+                        </div>
+                        <div class="rule-item do">
+                            <span class="rule-icon">✅</span>
+                            <div>
+                                <strong>Step-Up SIPs Annually</strong>
+                                <p>Increase SIP by 10-15% each year with salary growth. Dramatically improves final corpus.</p>
+                            </div>
+                        </div>
+                        <div class="rule-item dont">
+                            <span class="rule-icon">❌</span>
+                            <div>
+                                <strong>Never Redeem for Consumption</strong>
+                                <p>L3 is only for retirement/long-term wealth. Use L1/L2 for all other needs.</p>
+                            </div>
+                        </div>
+                        <div class="rule-item dont">
+                            <span class="rule-icon">❌</span>
+                            <div>
+                                <strong>Never Stop SIPs in Market Crash</strong>
+                                <p>Crashes are buying opportunities. Stopping SIPs locks in losses.</p>
+                            </div>
+                        </div>
+                        <div class="rule-item dont">
+                            <span class="rule-icon">❌</span>
+                            <div>
+                                <strong>Never Time the Market</strong>
+                                <p>Don't pause SIPs waiting for "better entry". Time in market > Timing the market.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goal Planner for L2 -->
+            <div class="goal-planner-section" id="goal-planner">
+                <h3>🎯 L2 Goal Planner</h3>
+                <p style="color: #94a3b8; margin-bottom: 20px;">L2 is for <strong>specific planned goals only</strong>. No goals = No L2 needed (money goes to L3). Add your goals below:</p>
+                
+                <div class="goal-input-form">
+                    <div class="goal-inputs">
+                        <input type="text" id="goal-name" placeholder="Goal name (e.g., Car, Vacation)">
+                        <input type="number" id="goal-amount" placeholder="Amount needed (₹)">
+                        <select id="goal-timeline">
+                            <option value="1">1 Year</option>
+                            <option value="2" selected>2 Years</option>
+                            <option value="3">3 Years</option>
+                            <option value="4">4 Years</option>
+                            <option value="5">5 Years</option>
+                        </select>
+                        <button onclick="addGoal()" class="add-goal-btn">+ Add Goal</button>
+                    </div>
+                </div>
+                
+                <div class="goals-list" id="goals-list">
+                    <!-- Goals will be added here dynamically -->
+                </div>
+                
+                <div class="goal-summary">
+                    <div class="goal-total">
+                        <span>Total L2 Required:</span>
+                        <span class="goal-total-amount" id="total-l2-goals">₹0</span>
+                    </div>
+                    <div class="goal-monthly">
+                        <span>Monthly Investment Needed:</span>
+                        <span class="goal-monthly-amount" id="monthly-l2-needed">₹0</span>
+                    </div>
+                </div>
+                
+                <div class="goal-note">
+                    <strong>💡 Fund Selection by Timeline:</strong>
+                    <ul>
+                        <li><strong>1-2 years:</strong> Arbitrage Funds (equity taxation, low volatility)</li>
+                        <li><strong>2-3 years:</strong> Equity Savings Funds (65%+ equity, better returns)</li>
+                        <li><strong>3-5 years:</strong> Balanced Advantage Funds (dynamic allocation)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ISR Options -->
+            <div class="isr-options-section">
+                <h3>📐 Retirement Corpus Calculator (ISR Method)</h3>
+                <p style="color: #94a3b8; margin-bottom: 20px;">ISR (Income to Savings Ratio) determines how much corpus you need for retirement. Choose based on your risk tolerance:</p>
+                
+                <div class="isr-selector">
+                    <label>Select ISR Approach:</label>
+                    <select id="isr-choice" onchange="updateISRProjection()">
+                        <option value="17.5">Aggressive (ISR 17.5 = 5.7% withdrawal)</option>
+                        <option value="20">Moderate-Aggressive (ISR 20 = 5% withdrawal)</option>
+                        <option value="22" selected>Moderate (ISR 22 = 4.5% withdrawal)</option>
+                        <option value="25">Conservative (ISR 25 = 4% withdrawal)</option>
+                        <option value="30">Very Conservative (ISR 30 = 3.3% withdrawal)</option>
+                    </select>
+                </div>
+                
+                <div class="isr-explanation">
+                    <div class="isr-card">
+                        <h4>Your Required Corpus</h4>
+                        <p class="isr-formula">Annual Expenses × ISR = Required Corpus</p>
+                        <p class="isr-result" id="isr-corpus-result">₹6L × 22 = ₹1.32 Cr</p>
+                    </div>
+                    <div class="isr-warning" id="isr-warning">
+                        <strong>⚠️ Risk Factors for Lower ISR:</strong>
+                        <ul>
+                            <li>Healthcare inflation (12-15% in India)</li>
+                            <li>Sequence of returns risk in early retirement</li>
+                            <li>Longevity risk (living longer than expected)</li>
+                            <li>No safety margin for unexpected expenses</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bucket Refill Strategy -->
+            <div class="bucket-refill-section">
+                <h3>🔄 Retirement Bucket Refill Strategy</h3>
+                <p style="color: #94a3b8; margin-bottom: 20px;">During retirement, here's how to refill your buckets:</p>
+                
+                <div class="refill-rules">
+                    <div class="refill-rule">
+                        <div class="refill-icon">1️⃣</div>
+                        <div class="refill-content">
+                            <h4>B1 (Liquid) Refill</h4>
+                            <p><strong>When:</strong> B1 drops below 1 year of expenses</p>
+                            <p><strong>From:</strong> B2 (Stability bucket)</p>
+                            <p><strong>How much:</strong> Top up to 3 years</p>
+                        </div>
+                    </div>
+                    <div class="refill-rule">
+                        <div class="refill-icon">2️⃣</div>
+                        <div class="refill-content">
+                            <h4>B2 (Stability) Refill</h4>
+                            <p><strong>When:</strong> B2 drops below 1.5 years AND markets are positive</p>
+                            <p><strong>From:</strong> B3 (Equity bucket)</p>
+                            <p><strong>Condition:</strong> Only when equity markets are above 200-DMA or in uptrend</p>
+                        </div>
+                    </div>
+                    <div class="refill-rule">
+                        <div class="refill-icon">⚠️</div>
+                        <div class="refill-content">
+                            <h4>Bear Market Rule</h4>
+                            <p><strong>If markets crash:</strong> Do NOT refill B2 from B3</p>
+                            <p><strong>Instead:</strong> Let B1+B2 deplete (you have 6 years buffer)</p>
+                            <p><strong>Wait:</strong> Until markets recover above 200-DMA to refill</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projected Wealth -->
+            <div class="wealth-projection">
+                <h3>📈 Your Wealth Projection</h3>
+                <div class="projection-results">
+                    <div class="projection-card">
+                        <span class="proj-label">Years to Retirement</span>
+                        <span class="proj-value" id="proj-years">20</span>
+                    </div>
+                    <div class="projection-card">
+                        <span class="proj-label">Monthly SIP</span>
+                        <span class="proj-value" id="proj-sip">₹40,000</span>
+                    </div>
+                    <div class="projection-card highlight">
+                        <span class="proj-label">Projected Corpus @12%</span>
+                        <span class="proj-value" id="proj-corpus">₹4.2 Cr</span>
+                    </div>
+                    <div class="projection-card">
+                        <span class="proj-label">Can Support Monthly</span>
+                        <span class="proj-value" id="proj-monthly">₹2,00,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Working Years Tab -->
+        <div id="working" class="tab-content">
+            <h2 style="margin-bottom: 20px; color: #00d4ff;">4-Level Wealth Building System</h2>
+            
+            <div class="levels-container">
+                <!-- Level 3 - Top -->
+                <div class="level-card level-3">
+                    <div class="level-header">
+                        <div class="level-title">
+                            <div class="level-number">L3</div>
+                            <div class="level-name">
+                                <h3>Equity SIPs</h3>
+                                <span>Long-Term Growth • Never Touch Until Retirement</span>
+                            </div>
+                        </div>
+                        <div class="level-target">
+                            <div class="amount">All Surplus</div>
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="input-group">
+                            <label>Current:</label>
+                            <input type="number" id="l3-current" placeholder="₹" oninput="updateProgress(3)">
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="l3-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-details">
+                            <span>₹<span id="l3-current-display">0</span></span>
+                            <span>Target: Maximize</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-arrow">↑ Surplus flows up</div>
+
+                <!-- Level 2 -->
+                <div class="level-card level-2">
+                    <div class="level-header">
+                        <div class="level-title">
+                            <div class="level-number">L2</div>
+                            <div class="level-name">
+                                <h3>Goal-Based Savings</h3>
+                                <span>Planned Goals • 1-5 Year Timeline</span>
+                            </div>
+                        </div>
+                        <div class="level-target">
+                            <div class="amount">Based on Goals</div>
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="input-group">
+                            <label>Current:</label>
+                            <input type="number" id="l2-current" value="0" oninput="updateProgress(2)">
+                            <label>Target:</label>
+                            <input type="number" id="l2-target" value="0" oninput="updateProgress(2)">
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="l2-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-details">
+                            <span>₹<span id="l2-current-display">0</span></span>
+                            <span>Target: ₹<span id="l2-target-display">0</span> (Set goals in Planner)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-arrow">↑ After L1 is full</div>
+
+                <!-- Level 1 -->
+                <div class="level-card level-1">
+                    <div class="level-header">
+                        <div class="level-title">
+                            <div class="level-number">L1</div>
+                            <div class="level-name">
+                                <h3>Emergency Fund</h3>
+                                <span>6 Months Expenses • Arbitrage/Liquid Fund</span>
+                            </div>
+                        </div>
+                        <div class="level-target">
+                            <div class="amount">6× Expenses</div>
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="input-group">
+                            <label>Current:</label>
+                            <input type="number" id="l1-current" value="0" oninput="updateProgress(1)">
+                            <label>Target:</label>
+                            <input type="number" id="l1-target" value="300000" oninput="updateProgress(1)">
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="l1-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-details">
+                            <span>₹<span id="l1-current-display">0</span></span>
+                            <span>Target: ₹<span id="l1-target-display">3,00,000</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-arrow">↑ After L0 is stable</div>
+
+                <!-- Level 0 -->
+                <div class="level-card level-0">
+                    <div class="level-header">
+                        <div class="level-title">
+                            <div class="level-number">L0</div>
+                            <div class="level-name">
+                                <h3>Bank Buffer</h3>
+                                <span>Daily Operations • Min ₹50k or 1 Month Expenses</span>
+                            </div>
+                        </div>
+                        <div class="level-target">
+                            <div class="amount">₹50k-1L</div>
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="input-group">
+                            <label>Current:</label>
+                            <input type="number" id="l0-current" value="0" oninput="updateProgress(0)">
+                            <label>Target:</label>
+                            <input type="number" id="l0-target" value="50000" oninput="updateProgress(0)">
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="l0-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-details">
+                            <span>₹<span id="l0-current-display">0</span></span>
+                            <span>Target: ₹<span id="l0-target-display">50,000</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="icon">📊</div>
+                    <h4>Total Tracked</h4>
+                    <div class="value" id="total-tracked">₹0</div>
+                </div>
+                <div class="summary-card">
+                    <div class="icon">🎯</div>
+                    <h4>Total Target (L0-L2)</h4>
+                    <div class="value" id="total-target">₹6,50,000</div>
+                </div>
+                <div class="summary-card">
+                    <div class="icon">📈</div>
+                    <h4>Overall Progress</h4>
+                    <div class="value" id="overall-progress">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Retirement Buckets Tab -->
+        <div id="retirement" class="tab-content">
+            <h2 style="margin-bottom: 20px; color: #00d4ff;">3-Bucket Retirement System</h2>
+            
+            <div class="calc-card" style="margin-bottom: 30px;">
+                <h3>Configure Your Retirement</h3>
+                <div class="calc-input">
+                    <label>Monthly Expense Need (₹)</label>
+                    <input type="number" id="monthly-expense" value="100000" oninput="calculateBuckets()">
+                </div>
+                <div class="calc-input">
+                    <label>Total Corpus at Retirement (₹)</label>
+                    <input type="number" id="retirement-corpus" value="21000000" oninput="calculateBuckets()">
+                </div>
+            </div>
+
+            <div class="buckets-visual">
+                <div class="bucket-card bucket-1">
+                    <div class="bucket-icon">💵</div>
+                    <h3>Bucket 1</h3>
+                    <p class="purpose">3 Years Expenses<br>Arbitrage / Liquid Fund<br>Monthly SWP Source</p>
+                    <div class="bucket-amount" id="bucket1-amount">₹36 Lakh</div>
+                </div>
+                
+                <div class="bucket-card bucket-2">
+                    <div class="bucket-icon">⚖️</div>
+                    <h3>Bucket 2</h3>
+                    <p class="purpose">Stability Fund<br>Debt / Hybrid<br>Refills Bucket 1</p>
+                    <div class="bucket-amount" id="bucket2-amount">₹36 Lakh</div>
+                </div>
+                
+                <div class="bucket-card bucket-3">
+                    <div class="bucket-icon">🚀</div>
+                    <h3>Bucket 3</h3>
+                    <p class="purpose">Growth Engine<br>Equity Funds<br>Long-term Appreciation</p>
+                    <div class="bucket-amount" id="bucket3-amount">₹1.38 Cr</div>
+                </div>
+            </div>
+
+            <div class="calc-result">
+                <h4>💡 How It Works</h4>
+                <div class="result-row">
+                    <span>Monthly SWP from Bucket 1</span>
+                    <span class="result-value" id="swp-amount">₹1,00,000</span>
+                </div>
+                <div class="result-row">
+                    <span>Bucket 1 lasts</span>
+                    <span class="result-value">3 Years</span>
+                </div>
+                <div class="result-row">
+                    <span>Bucket 2 refills Bucket 1</span>
+                    <span class="result-value">When B1 depletes</span>
+                </div>
+                <div class="result-row">
+                    <span>Bucket 3 grows & refills B2</span>
+                    <span class="result-value">During market highs</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Tab -->
+        <div id="calculator" class="tab-content">
+            <div class="calculator-grid">
+                <!-- ISR Calculator -->
+                <div class="calc-card">
+                    <h3>📐 ISR Corpus Calculator</h3>
+                    <p style="color: #94a3b8; margin-bottom: 20px;">ISR (Income to Savings Ratio) = 17.5 for lifetime income</p>
+                    
+                    <div class="calc-input">
+                        <label>Monthly Expense Need (₹)</label>
+                        <input type="number" id="isr-monthly" value="100000">
+                    </div>
+                    
+                    <div class="calc-input">
+                        <label>ISR Multiplier</label>
+                        <input type="number" id="isr-multiplier" value="17.5" step="0.5">
+                    </div>
+                    
+                    <button class="calc-btn" onclick="calculateISR()">Calculate Required Corpus</button>
+                    
+                    <div class="calc-result" id="isr-result" style="display: none;">
+                        <h4>Results</h4>
+                        <div class="result-row">
+                            <span>Annual Expense</span>
+                            <span class="result-value" id="isr-annual">₹12,00,000</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Required Corpus</span>
+                            <span class="result-value" id="isr-corpus">₹2.1 Cr</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Safe Withdrawal Rate</span>
+                            <span class="result-value" id="isr-swr">5.71%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIP Calculator with Step-Up -->
+                <div class="calc-card">
+                    <h3>📈 SIP Growth Calculator</h3>
+                    <p style="color: #94a3b8; margin-bottom: 20px;">Project your SIP wealth with optional annual step-up</p>
+                    
+                    <div class="calc-input">
+                        <label>Monthly SIP (₹)</label>
+                        <input type="number" id="sip-monthly" value="35000">
+                    </div>
+                    
+                    <div class="calc-input">
+                        <label>Annual Step-Up (%)</label>
+                        <input type="number" id="sip-stepup" value="10" step="1" min="0" max="50">
+                        <small style="color: #64748b; display: block; margin-top: 5px;">Increase SIP by this % every year (0 for no step-up)</small>
+                    </div>
+                    
+                    <div class="calc-input">
+                        <label>Expected Return (%)</label>
+                        <input type="number" id="sip-return" value="12" step="0.5">
+                    </div>
+                    
+                    <div class="calc-input">
+                        <label>Years</label>
+                        <input type="number" id="sip-years" value="15">
+                    </div>
+                    
+                    <button class="calc-btn" onclick="calculateSIP()">Calculate Future Value</button>
+                    
+                    <div class="calc-result" id="sip-result" style="display: none;">
+                        <h4>Projected Wealth</h4>
+                        <div class="result-row">
+                            <span>Total Investment</span>
+                            <span class="result-value" id="sip-invested">₹63 Lakh</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Expected Returns</span>
+                            <span class="result-value" id="sip-returns">₹1.14 Cr</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Future Value</span>
+                            <span class="result-value" id="sip-future">₹1.77 Cr</span>
+                        </div>
+                        <div class="result-row" id="sip-final-row">
+                            <span>Final Monthly SIP</span>
+                            <span class="result-value" id="sip-final-amount">₹35,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lump Sum Calculator -->
+                <div class="calc-card">
+                    <h3>💰 Lump Sum Calculator</h3>
+                    <p style="color: #94a3b8; margin-bottom: 20px;">Calculate growth of one-time investment</p>
+                    
+                    <div class="calc-input">
+                        <label>Lump Sum Amount (₹)</label>
+                        <input type="number" id="lumpsum-amount" value="500000">
+                    </div>
+                    
+                    <div class="calc-input">
+                        <label>Expected Return (%)</label>
+                        <input type="number" id="lumpsum-return" value="12" step="0.5">
+                    </div>
+                    
+                    <div class="calc-input">
+                        <label>Years</label>
+                        <input type="number" id="lumpsum-years" value="10">
+                    </div>
+                    
+                    <button class="calc-btn" onclick="calculateLumpsum()">Calculate Future Value</button>
+                    
+                    <div class="calc-result" id="lumpsum-result" style="display: none;">
+                        <h4>Projected Growth</h4>
+                        <div class="result-row">
+                            <span>Initial Investment</span>
+                            <span class="result-value" id="lumpsum-initial">₹5 Lakh</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Total Returns</span>
+                            <span class="result-value" id="lumpsum-returns">₹10.5 Lakh</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Future Value</span>
+                            <span class="result-value" id="lumpsum-future">₹15.5 Lakh</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Wealth Multiplier</span>
+                            <span class="result-value" id="lumpsum-multiplier">3.1x</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Fund Calculator -->
+                <div class="calc-card">
+                    <h3>🛡️ Emergency Fund Calculator</h3>
+                    <p style="color: #94a3b8; margin-bottom: 20px;">Calculate your ideal emergency fund</p>
+                    
+                    <div class="calc-input">
+                        <label>Monthly Expenses (₹)</label>
+                        <input type="number" id="ef-expenses" value="50000">
+                    </div>
+                    
+                    <div class="calc-input">
+                        <label>Months of Cover</label>
+                        <select id="ef-months">
+                            <option value="3">3 Months (Minimum)</option>
+                            <option value="6" selected>6 Months (Recommended)</option>
+                            <option value="9">9 Months (Conservative)</option>
+                            <option value="12">12 Months (Very Safe)</option>
+                        </select>
+                    </div>
+                    
+                    <button class="calc-btn" onclick="calculateEF()">Calculate</button>
+                    
+                    <div class="calc-result" id="ef-result" style="display: none;">
+                        <h4>Emergency Fund Target</h4>
+                        <div class="result-row">
+                            <span>Recommended Amount</span>
+                            <span class="result-value" id="ef-amount">₹3,00,000</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Split Suggestion</span>
+                            <span class="result-value" id="ef-split">L0: ₹50k | L1: ₹2.5L</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time to Goal Calculator -->
+                <div class="calc-card">
+                    <h3>⏱️ Time to Goal Calculator</h3>
+                    <p style="color: #94a3b8; margin-bottom: 20px;">How long to reach your target?</p>
+                    
+                    <div class="calc-input">
+                        <label>Goal Amount (₹)</label>
+                        <input type="number" id="goal-amount" value="10000000">
+                    </div>
+                    
+                    <div class="calc-input">
+                        <label>Current Savings (₹)</label>
+                        <input type="number" id="goal-current" value="0">
+                    </div>
+                    
+                    <div class="calc-input">
+                        <label>Monthly Investment (₹)</label>
+                        <input type="number" id="goal-monthly" value="35000">
+                    </div>
+                    
+                    <div class="calc-input">
+                        <label>Expected Return (%)</label>
+                        <input type="number" id="goal-return" value="12" step="0.5">
+                    </div>
+                    
+                    <button class="calc-btn" onclick="calculateTimeToGoal()">Calculate Time</button>
+                    
+                    <div class="calc-result" id="goal-result" style="display: none;">
+                        <h4>Time Required</h4>
+                        <div class="result-row">
+                            <span>Years to Goal</span>
+                            <span class="result-value" id="goal-years">12.5 Years</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Target Year</span>
+                            <span class="result-value" id="goal-target-year">2037</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rules Tab -->
+        <div id="rules" class="tab-content">
+            <h2 style="margin-bottom: 20px; color: #00d4ff;">📋 Golden Rules</h2>
+            
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <h4>✅ Bank Buffer</h4>
+                    <p>Always maintain ₹50,000 minimum in bank account for daily operations and unexpected small expenses.</p>
+                </div>
+                
+                <div class="rule-card">
+                    <h4>✅ Fill L1 First</h4>
+                    <p>Before investing in anything else, ensure L1 (Arbitrage Fund) reaches ₹3 Lakh for emergencies.</p>
+                </div>
+                
+                <div class="rule-card">
+                    <h4>✅ Then Fill L2</h4>
+                    <p>Once L1 is full, build L2 (Debt/Arbitrage FoF) to ₹2-3 Lakh for planned expenses within 2-3 years.</p>
+                </div>
+                
+                <div class="rule-card">
+                    <h4>✅ Surplus to L3</h4>
+                    <p>All money beyond L0-L2 targets should go into Equity SIPs for long-term wealth building.</p>
+                </div>
+                
+                <div class="rule-card warning">
+                    <h4>⚠️ Emergency Usage</h4>
+                    <p>Use L1 for genuine emergencies only. Rebuild it immediately after using. Don't touch L3 for this.</p>
+                </div>
+                
+                <div class="rule-card warning">
+                    <h4>⚠️ Planned Expenses</h4>
+                    <p>Use L2 for planned big expenses (travel, gadgets, school fees). Redeem units older than 2 years first.</p>
+                </div>
+                
+                <div class="rule-card danger">
+                    <h4>🚫 Never Touch L3 Early</h4>
+                    <p>Equity SIPs are for retirement. Don't redeem before retirement unless absolute crisis.</p>
+                </div>
+                
+                <div class="rule-card danger">
+                    <h4>🚫 Don't Skip SIPs</h4>
+                    <p>Missing SIPs breaks compounding. Only pause during genuine cash flow emergencies, resume ASAP.</p>
+                </div>
+            </div>
+
+            <div class="calc-result" style="margin-top: 30px;">
+                <h4>🎯 One-Line Summary</h4>
+                <p style="font-size: 1.2rem; text-align: center; padding: 20px 0; color: #e4e4e4;">
+                    <strong>4 Levels</strong> to build wealth →
+                    <strong>3 Buckets</strong> to live from wealth →
+                    <strong>ISR 17.5</strong> guarantees lifetime income
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Format number to Indian currency
+        function formatIndianCurrency(num) {
+            if (num >= 10000000) {
+                return '₹' + (num / 10000000).toFixed(2) + ' Cr';
+            } else if (num >= 100000) {
+                return '₹' + (num / 100000).toFixed(2) + ' Lakh';
+            } else {
+                return '₹' + num.toLocaleString('en-IN');
+            }
+        }
+
+        // Update progress bars
+        function updateProgress(level) {
+            const current = parseFloat(document.getElementById(`l${level}-current`).value) || 0;
+            const target = level === 3 ? current : (parseFloat(document.getElementById(`l${level}-target`).value) || 1);
+            
+            let percentage = level === 3 ? 100 : Math.min((current / target) * 100, 100);
+            
+            document.getElementById(`l${level}-progress`).style.width = percentage + '%';
+            document.getElementById(`l${level}-current-display`).textContent = current.toLocaleString('en-IN');
+            
+            if (level !== 3) {
+                document.getElementById(`l${level}-target-display`).textContent = target.toLocaleString('en-IN');
+            }
+            
+            updateTotals();
+        }
+
+        // Update total summary
+        function updateTotals() {
+            let total = 0;
+            let target = 0;
+            
+            for (let i = 0; i <= 3; i++) {
+                total += parseFloat(document.getElementById(`l${i}-current`).value) || 0;
+                if (i <= 2) {
+                    target += parseFloat(document.getElementById(`l${i}-target`).value) || 0;
+                }
+            }
+            
+            document.getElementById('total-tracked').textContent = formatIndianCurrency(total);
+            document.getElementById('total-target').textContent = formatIndianCurrency(target);
+            
+            const progress = target > 0 ? Math.round((total / target) * 100) : 0;
+            document.getElementById('overall-progress').textContent = Math.min(progress, 100) + '%';
+        }
+
+        // Calculate retirement buckets
+        function calculateBuckets() {
+            const monthly = parseFloat(document.getElementById('monthly-expense').value) || 100000;
+            const corpus = parseFloat(document.getElementById('retirement-corpus').value) || 21000000;
+            
+            const bucket1 = monthly * 12 * 3; // 3 years
+            const bucket2 = bucket1; // Same as bucket 1
+            const bucket3 = corpus - bucket1 - bucket2;
+            
+            document.getElementById('bucket1-amount').textContent = formatIndianCurrency(bucket1);
+            document.getElementById('bucket2-amount').textContent = formatIndianCurrency(bucket2);
+            document.getElementById('bucket3-amount').textContent = formatIndianCurrency(Math.max(0, bucket3));
+            document.getElementById('swp-amount').textContent = formatIndianCurrency(monthly);
+        }
+
+        // ISR Calculator
+        function calculateISR() {
+            const monthly = parseFloat(document.getElementById('isr-monthly').value) || 100000;
+            const multiplier = parseFloat(document.getElementById('isr-multiplier').value) || 17.5;
+            
+            const annual = monthly * 12;
+            const corpus = annual * multiplier;
+            const swr = (1 / multiplier) * 100;
+            
+            document.getElementById('isr-annual').textContent = formatIndianCurrency(annual);
+            document.getElementById('isr-corpus').textContent = formatIndianCurrency(corpus);
+            document.getElementById('isr-swr').textContent = swr.toFixed(2) + '%';
+            document.getElementById('isr-result').style.display = 'block';
+        }
+
+        // SIP Calculator with Step-Up
+        function calculateSIP() {
+            const initialMonthly = parseFloat(document.getElementById('sip-monthly').value) || 35000;
+            const stepUpPercent = parseFloat(document.getElementById('sip-stepup').value) || 0;
+            const annualRate = parseFloat(document.getElementById('sip-return').value) / 100;
+            const monthlyRate = annualRate / 12;
+            const years = parseFloat(document.getElementById('sip-years').value) || 15;
+            
+            let totalInvested = 0;
+            let futureValue = 0;
+            let currentMonthly = initialMonthly;
+            
+            // Calculate year by year with step-up
+            for (let year = 1; year <= years; year++) {
+                // Each month of this year
+                for (let month = 1; month <= 12; month++) {
+                    totalInvested += currentMonthly;
+                    // Calculate remaining months till end
+                    const remainingMonths = (years - year) * 12 + (12 - month);
+                    futureValue += currentMonthly * Math.pow(1 + monthlyRate, remainingMonths + 1);
+                }
+                // Apply step-up for next year
+                if (year < years) {
+                    currentMonthly = currentMonthly * (1 + stepUpPercent / 100);
+                }
+            }
+            
+            const returns = futureValue - totalInvested;
+            const finalMonthly = initialMonthly * Math.pow(1 + stepUpPercent / 100, years - 1);
+            
+            document.getElementById('sip-invested').textContent = formatIndianCurrency(totalInvested);
+            document.getElementById('sip-returns').textContent = formatIndianCurrency(returns);
+            document.getElementById('sip-future').textContent = formatIndianCurrency(futureValue);
+            document.getElementById('sip-final-amount').textContent = formatIndianCurrency(Math.round(finalMonthly));
+            
+            // Show/hide final SIP row based on step-up
+            document.getElementById('sip-final-row').style.display = stepUpPercent > 0 ? 'flex' : 'none';
+            
+            document.getElementById('sip-result').style.display = 'block';
+        }
+
+        // Lump Sum Calculator
+        function calculateLumpsum() {
+            const principal = parseFloat(document.getElementById('lumpsum-amount').value) || 500000;
+            const rate = parseFloat(document.getElementById('lumpsum-return').value) / 100;
+            const years = parseFloat(document.getElementById('lumpsum-years').value) || 10;
+            
+            const futureValue = principal * Math.pow(1 + rate, years);
+            const returns = futureValue - principal;
+            const multiplier = futureValue / principal;
+            
+            document.getElementById('lumpsum-initial').textContent = formatIndianCurrency(principal);
+            document.getElementById('lumpsum-returns').textContent = formatIndianCurrency(returns);
+            document.getElementById('lumpsum-future').textContent = formatIndianCurrency(futureValue);
+            document.getElementById('lumpsum-multiplier').textContent = multiplier.toFixed(2) + 'x';
+            document.getElementById('lumpsum-result').style.display = 'block';
+        }
+
+        // Emergency Fund Calculator
+        function calculateEF() {
+            const expenses = parseFloat(document.getElementById('ef-expenses').value) || 50000;
+            const months = parseInt(document.getElementById('ef-months').value) || 6;
+            
+            const total = expenses * months;
+            const l0 = 50000;
+            const l1 = total - l0;
+            
+            document.getElementById('ef-amount').textContent = formatIndianCurrency(total);
+            document.getElementById('ef-split').textContent = `L0: ₹50k | L1: ${formatIndianCurrency(l1)}`;
+            document.getElementById('ef-result').style.display = 'block';
+        }
+
+        // Time to Goal Calculator
+        function calculateTimeToGoal() {
+            const goal = parseFloat(document.getElementById('goal-amount').value) || 10000000;
+            const current = parseFloat(document.getElementById('goal-current').value) || 0;
+            const monthly = parseFloat(document.getElementById('goal-monthly').value) || 35000;
+            const rate = parseFloat(document.getElementById('goal-return').value) / 100 / 12;
+            
+            // Using logarithm to solve for time
+            const remaining = goal - current * Math.pow(1 + rate, 1);
+            const months = Math.log((remaining * rate / monthly) + 1) / Math.log(1 + rate);
+            const years = months / 12;
+            
+            const targetYear = new Date().getFullYear() + Math.ceil(years);
+            
+            document.getElementById('goal-years').textContent = years.toFixed(1) + ' Years';
+            document.getElementById('goal-target-year').textContent = targetYear;
+            document.getElementById('goal-result').style.display = 'block';
+        }
+
+        // Goal Management - declare before use
+        let goals = [];
+
+        // Initialize
+        updateProgress(0);
+        updateProgress(1);
+        updateProgress(2);
+        updateProgress(3);
+        calculateBuckets();
+        generatePlan(); // Initialize personalized plan
+
+        // Generate Personalized Plan
+        function generatePlan() {
+            const salary = parseFloat(document.getElementById('plan-salary').value) || 100000;
+            const expenses = parseFloat(document.getElementById('plan-expenses').value) || 50000;
+            const taxBracket = parseFloat(document.getElementById('plan-tax-bracket').value) || 30;
+            const age = parseFloat(document.getElementById('plan-age').value) || 30;
+            const retireAge = parseFloat(document.getElementById('plan-retire-age').value) || 50;
+            const existing = parseFloat(document.getElementById('plan-existing').value) || 0;
+
+            const surplus = salary - expenses;
+            const yearsToRetire = retireAge - age;
+
+            // Calculate recommended allocations - DYNAMIC based on expenses
+            const l0Amount = Math.max(50000, expenses); // Minimum ₹50k OR 1 month expenses
+            const l1Amount = expenses * 6; // 6 months expenses
+            // L2 is now goal-based, calculated separately
+            const totalGoals = goals.reduce((sum, g) => sum + g.amount, 0);
+            
+            // SIP recommendation (80% of surplus after buffer needs are met)
+            const recommendedSIP = Math.max(surplus * 0.8, 0);
+            const bufferBuilding = surplus - recommendedSIP;
+
+            // Update allocation displays
+            document.getElementById('alloc-l0').textContent = formatIndianCurrency(l0Amount);
+            document.getElementById('alloc-l1').textContent = formatIndianCurrency(l1Amount);
+            // L2 updated by updateL2Display()
+            document.getElementById('alloc-l3').textContent = formatIndianCurrency(recommendedSIP) + '/mo';
+
+            // Update fund recommendations based on tax bracket
+            updateFundRecommendations(taxBracket);
+
+            // Update flow breakdown
+            document.getElementById('flow-income').textContent = formatIndianCurrency(salary);
+            document.getElementById('flow-expenses').textContent = '- ' + formatIndianCurrency(expenses);
+            document.getElementById('flow-surplus').textContent = formatIndianCurrency(surplus);
+            document.getElementById('flow-sip').textContent = formatIndianCurrency(recommendedSIP);
+            document.getElementById('flow-buffer').textContent = formatIndianCurrency(bufferBuilding);
+
+            // Update tax bracket display
+            document.getElementById('display-bracket').textContent = taxBracket + '%';
+
+            // Update tax comparison table
+            updateTaxTable(taxBracket);
+
+            // Update fund category recommendations
+            updateFundCategories(taxBracket);
+
+            // Calculate wealth projection using selected ISR
+            const isr = parseFloat(document.getElementById('isr-choice')?.value) || 22;
+            const monthlyRate = 0.12 / 12; // 12% annual return
+            const months = yearsToRetire * 12;
+            let futureValue = existing * Math.pow(1 + 0.12, yearsToRetire); // Existing grows
+            
+            // Add SIP growth
+            if (recommendedSIP > 0 && months > 0) {
+                futureValue += recommendedSIP * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+            }
+
+            const monthlyRetirement = futureValue / (isr * 12);
+
+            document.getElementById('proj-years').textContent = yearsToRetire;
+            document.getElementById('proj-sip').textContent = formatIndianCurrency(recommendedSIP);
+            document.getElementById('proj-corpus').textContent = formatIndianCurrency(futureValue);
+            document.getElementById('proj-monthly').textContent = formatIndianCurrency(monthlyRetirement);
+            
+            // Update ISR display
+            if (document.getElementById('isr-corpus-result')) {
+                const annualExpenses = expenses * 12;
+                document.getElementById('isr-corpus-result').textContent = 
+                    `${formatIndianCurrency(annualExpenses)} × ${isr} = ${formatIndianCurrency(annualExpenses * isr)}`;
+            }
+            
+            // Update L2 display
+            updateL2Display();
+        }
+
+        function updateFundRecommendations(taxBracket) {
+            const container = document.getElementById('fund-recommendations');
+            
+            let recommendations = '';
+            
+            if (taxBracket >= 25) {
+                // High tax bracket (25-30%) - arbitrage wins significantly
+                recommendations = `
+                    <div class="fund-reco-card recommended">
+                        <h4>Arbitrage Funds <span class="badge best">BEST</span></h4>
+                        <p>Tax-free LTCG up to ₹1.25L. For your ${taxBracket}% bracket, saves ~${Math.round(taxBracket - 12.5)}% on gains vs debt funds.</p>
+                        <div class="tax-rate">Effective Tax: 0-12.5%</div>
+                    </div>
+                    <div class="fund-reco-card recommended">
+                        <h4>Equity Savings Funds <span class="badge best">BEST</span></h4>
+                        <p>65%+ equity exposure = equity taxation. Good for medium-term goals with some growth.</p>
+                        <div class="tax-rate">Effective Tax: 12.5% LTCG</div>
+                    </div>
+                    <div class="fund-reco-card acceptable">
+                        <h4>Liquid Funds <span class="badge ok">OK for instant access</span></h4>
+                        <p>Keep minimal amount for instant redemption needs. Taxed at ${taxBracket}%.</p>
+                        <div class="tax-rate">Tax: ${taxBracket}% (your slab)</div>
+                    </div>
+                    <div class="fund-reco-card avoid">
+                        <h4>Debt Funds <span class="badge no">AVOID</span></h4>
+                        <p>No tax advantage over FD since 2023. Same ${taxBracket}% tax applies.</p>
+                        <div class="tax-rate">Tax: ${taxBracket}% (no benefit)</div>
+                    </div>
+                `;
+            } else if (taxBracket >= 15) {
+                // Medium-high bracket (15-20%) - arbitrage still beneficial
+                recommendations = `
+                    <div class="fund-reco-card recommended">
+                        <h4>Arbitrage Funds <span class="badge best">RECOMMENDED</span></h4>
+                        <p>At ${taxBracket}% slab, arbitrage saves ~${Math.round(taxBracket - 12.5)}% on gains. Worth the slight complexity.</p>
+                        <div class="tax-rate">Effective Tax: 0-12.5%</div>
+                    </div>
+                    <div class="fund-reco-card recommended">
+                        <h4>Equity Savings Funds <span class="badge best">GOOD</span></h4>
+                        <p>Equity taxation benefits apply. Good for 2-3 year goals.</p>
+                        <div class="tax-rate">Effective Tax: 12.5% LTCG</div>
+                    </div>
+                    <div class="fund-reco-card acceptable">
+                        <h4>Liquid Funds <span class="badge ok">ACCEPTABLE</span></h4>
+                        <p>For instant access needs. Difference vs arbitrage is moderate.</p>
+                        <div class="tax-rate">Tax: ${taxBracket}%</div>
+                    </div>
+                    <div class="fund-reco-card avoid">
+                        <h4>ELSS Funds <span class="badge no">AVOID</span></h4>
+                        <p>No 80C benefit under New Regime. 3-year lock-in with no advantage.</p>
+                        <div class="tax-rate">Skip it</div>
+                    </div>
+                `;
+            } else if (taxBracket >= 5) {
+                // Low-medium bracket (5-10%) - mixed approach
+                recommendations = `
+                    <div class="fund-reco-card acceptable">
+                        <h4>Arbitrage Funds <span class="badge ok">OPTIONAL</span></h4>
+                        <p>At ${taxBracket}% slab, benefit over liquid is small. Can use if holding 12+ months.</p>
+                        <div class="tax-rate">Effective Tax: 0-12.5%</div>
+                    </div>
+                    <div class="fund-reco-card recommended">
+                        <h4>Liquid Funds <span class="badge best">SIMPLE & GOOD</span></h4>
+                        <p>At ${taxBracket}% slab, liquid funds are nearly as efficient and simpler.</p>
+                        <div class="tax-rate">Tax: ${taxBracket}%</div>
+                    </div>
+                    <div class="fund-reco-card acceptable">
+                        <h4>Short Duration Debt <span class="badge ok">OK</span></h4>
+                        <p>Slightly higher returns than liquid, same tax treatment.</p>
+                        <div class="tax-rate">Tax: ${taxBracket}%</div>
+                    </div>
+                    <div class="fund-reco-card acceptable">
+                        <h4>Bank FD <span class="badge ok">ACCEPTABLE</span></h4>
+                        <p>At low brackets, FD is simple and tax impact is minimal.</p>
+                        <div class="tax-rate">Tax: ${taxBracket}%</div>
+                    </div>
+                `;
+            } else {
+                // Zero/very low bracket (0%) - simplify
+                recommendations = `
+                    <div class="fund-reco-card recommended">
+                        <h4>Liquid Funds <span class="badge best">SIMPLE & BEST</span></h4>
+                        <p>At 0% slab (rebate eligible), all options are tax-free. Pick the simplest.</p>
+                        <div class="tax-rate">Tax: 0% (rebate)</div>
+                    </div>
+                    <div class="fund-reco-card recommended">
+                        <h4>Overnight Funds <span class="badge best">SAFE</span></h4>
+                        <p>Zero credit risk. Good for emergency fund. Effectively tax-free for you.</p>
+                        <div class="tax-rate">Tax: 0% (rebate)</div>
+                    </div>
+                    <div class="fund-reco-card acceptable">
+                        <h4>Bank FD <span class="badge ok">SIMPLE</span></h4>
+                        <p>At your income level, FD interest is effectively tax-free.</p>
+                        <div class="tax-rate">Tax: 0% (rebate)</div>
+                    </div>
+                    <div class="fund-reco-card acceptable">
+                        <h4>Arbitrage Funds <span class="badge ok">UNNECESSARY</span></h4>
+                        <p>No tax benefit over liquid at 0% slab. Adds complexity for no gain.</p>
+                        <div class="tax-rate">No advantage</div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = recommendations;
+        }
+
+        function updateTaxTable(taxBracket) {
+            // Calculate post-tax returns for each fund type
+            const preReturn = 7000; // 7% on 1 lakh
+            
+            // Arbitrage: 0% if under 1.25L threshold, else 12.5%
+            const arbTaxRate = 0; // Assuming under threshold
+            const arbPostTax = preReturn * (1 - arbTaxRate/100);
+            
+            // Liquid/Debt: Taxed at slab rate
+            const debtTaxRate = taxBracket;
+            const debtPostTax = preReturn * (1 - debtTaxRate/100);
+
+            // Update table rows
+            document.getElementById('tax-row-arb').innerHTML = `
+                <span>Arbitrage Fund</span>
+                <span>₹7,000</span>
+                <span>0%*</span>
+                <span>₹${arbPostTax.toLocaleString('en-IN')}</span>
+                <span class="winner">₹${(100000 + arbPostTax).toLocaleString('en-IN')}</span>
+            `;
+
+            document.getElementById('tax-row-liquid').innerHTML = `
+                <span>Liquid Fund</span>
+                <span>₹7,000</span>
+                <span>${taxBracket}%</span>
+                <span>₹${debtPostTax.toLocaleString('en-IN')}</span>
+                <span>₹${(100000 + debtPostTax).toLocaleString('en-IN')}</span>
+            `;
+
+            document.getElementById('tax-row-debt').innerHTML = `
+                <span>Debt Fund</span>
+                <span>₹7,000</span>
+                <span>${taxBracket}%</span>
+                <span>₹${debtPostTax.toLocaleString('en-IN')}</span>
+                <span>₹${(100000 + debtPostTax).toLocaleString('en-IN')}</span>
+            `;
+
+            document.getElementById('tax-row-fd').innerHTML = `
+                <span>Bank FD</span>
+                <span>₹7,000</span>
+                <span>${taxBracket}%</span>
+                <span>₹${debtPostTax.toLocaleString('en-IN')}</span>
+                <span>₹${(100000 + debtPostTax).toLocaleString('en-IN')}</span>
+            `;
+        }
+
+        function updateFundCategories(taxBracket) {
+            // Fund categories section is now static HTML with SEBI categories
+            // Just update the L1/L2 fund labels based on tax bracket
+            
+            if (taxBracket >= 15) {
+                document.getElementById('fund-l1').textContent = 'Arbitrage Fund (SEBI: Hybrid)';
+            } else {
+                document.getElementById('fund-l1').textContent = 'Liquid Fund (SEBI: Debt)';
+            }
+            
+            // L2 is now goal-based, so show appropriate message
+            const totalGoals = goals.reduce((sum, g) => sum + g.amount, 0);
+            if (totalGoals > 0) {
+                document.getElementById('fund-l2').textContent = 'Goal-based (see planner)';
+            } else {
+                document.getElementById('fund-l2').textContent = 'Add goals below ↓';
+            }
+        }
+
+        function addGoal() {
+            const nameInput = document.getElementById('goal-name');
+            const amountInput = document.getElementById('goal-amount');
+            const timelineSelect = document.getElementById('goal-timeline');
+            
+            const name = nameInput.value.trim();
+            const amount = parseFloat(amountInput.value) || 0;
+            const timeline = parseInt(timelineSelect.value) || 2;
+            
+            if (!name || amount <= 0) {
+                alert('Please enter a valid goal name and amount');
+                return;
+            }
+            
+            goals.push({ id: Date.now(), name, amount, timeline });
+            
+            // Clear inputs
+            nameInput.value = '';
+            amountInput.value = '';
+            
+            renderGoals();
+            updateL2Display();
+        }
+
+        function removeGoal(id) {
+            goals = goals.filter(g => g.id !== id);
+            renderGoals();
+            updateL2Display();
+        }
+
+        function renderGoals() {
+            const container = document.getElementById('goals-list');
+            
+            if (goals.length === 0) {
+                container.innerHTML = '<p style="color: #64748b; text-align: center; padding: 20px;">No goals added yet. Add your first goal above!</p>';
+                return;
+            }
+            
+            container.innerHTML = goals.map(goal => {
+                const fundType = goal.timeline <= 2 ? 'Arbitrage Fund' : 
+                                 goal.timeline <= 3 ? 'Equity Savings Fund' : 'Balanced Advantage Fund';
+                return `
+                    <div class="goal-item">
+                        <div class="goal-info">
+                            <span class="goal-name">${goal.name}</span>
+                            <span class="goal-details">${formatIndianCurrency(goal.amount)} in ${goal.timeline} year${goal.timeline > 1 ? 's' : ''}</span>
+                            <span class="goal-details" style="color: #4ade80;">→ ${fundType}</span>
+                        </div>
+                        <button class="goal-remove" onclick="removeGoal(${goal.id})">Remove</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateL2Display() {
+            const totalGoals = goals.reduce((sum, g) => sum + g.amount, 0);
+            const expenses = parseFloat(document.getElementById('plan-expenses').value) || 50000;
+            
+            // Calculate monthly investment needed (simplified - assumes 8% return)
+            let monthlyNeeded = 0;
+            goals.forEach(goal => {
+                const months = goal.timeline * 12;
+                const rate = 0.08 / 12;
+                // PMT formula
+                monthlyNeeded += goal.amount / (((Math.pow(1 + rate, months) - 1) / rate) * (1 + rate));
+            });
+            
+            document.getElementById('total-l2-goals').textContent = formatIndianCurrency(totalGoals);
+            document.getElementById('monthly-l2-needed').textContent = formatIndianCurrency(Math.round(monthlyNeeded));
+            
+            // Update allocation card
+            if (totalGoals > 0) {
+                document.getElementById('alloc-l2').textContent = formatIndianCurrency(totalGoals);
+                document.getElementById('fund-l2').textContent = `${goals.length} goal${goals.length > 1 ? 's' : ''} tracked`;
+            } else {
+                document.getElementById('alloc-l2').textContent = '₹0 (No goals)';
+                document.getElementById('fund-l2').textContent = 'Add goals below ↓';
+            }
+        }
+
+        // Scroll helper
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // ISR Selector
+        function updateISRProjection() {
+            const isr = parseFloat(document.getElementById('isr-choice').value) || 22;
+            const expenses = parseFloat(document.getElementById('plan-expenses').value) || 50000;
+            const annualExpenses = expenses * 12;
+            const corpus = annualExpenses * isr;
+            
+            document.getElementById('isr-corpus-result').textContent = 
+                `${formatIndianCurrency(annualExpenses)} × ${isr} = ${formatIndianCurrency(corpus)}`;
+            
+            // Show/hide warning based on ISR choice
+            const warning = document.getElementById('isr-warning');
+            if (isr <= 20) {
+                warning.style.display = 'block';
+            } else {
+                warning.style.display = 'none';
+            }
+            
+            // Update wealth projection with selected ISR
+            updateWealthProjection();
+        }
+
+        function updateWealthProjection() {
+            const isr = parseFloat(document.getElementById('isr-choice').value) || 22;
+            const salary = parseFloat(document.getElementById('plan-salary').value) || 100000;
+            const expenses = parseFloat(document.getElementById('plan-expenses').value) || 50000;
+            const age = parseFloat(document.getElementById('plan-age').value) || 30;
+            const retireAge = parseFloat(document.getElementById('plan-retire-age').value) || 50;
+            const existing = parseFloat(document.getElementById('plan-existing').value) || 0;
+            
+            const surplus = salary - expenses;
+            const yearsToRetire = retireAge - age;
+            const recommendedSIP = Math.max(surplus * 0.8, 0);
+            
+            const monthlyRate = 0.12 / 12;
+            const months = yearsToRetire * 12;
+            let futureValue = existing * Math.pow(1 + 0.12, yearsToRetire);
+            
+            if (recommendedSIP > 0 && months > 0) {
+                futureValue += recommendedSIP * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+            }
+            
+            const monthlyRetirement = futureValue / (isr * 12);
+            
+            document.getElementById('proj-corpus').textContent = formatIndianCurrency(futureValue);
+            document.getElementById('proj-monthly').textContent = formatIndianCurrency(monthlyRetirement);
+        }
+
+        // Initialize goals display
+        renderGoals();
+    </script>
+</body>
+</html>
