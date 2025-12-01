@@ -1818,6 +1818,343 @@
             opacity: 1;
             visibility: visible;
         }
+
+        /* ===== JOURNEY VISUALIZER STYLES ===== */
+
+        .journey-container {
+            padding: 20px;
+        }
+
+        .journey-inputs {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .journey-input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .journey-inputs .input-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .journey-inputs label {
+            color: #94a3b8;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .journey-inputs input {
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid #4a6fa5;
+            background: #0f2744;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .journey-inputs input:focus {
+            outline: none;
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+        }
+
+        .generate-journey-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .generate-journey-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+        }
+
+        .journey-timeline {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .milestone-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid #4a6fa5;
+            border-radius: 16px;
+            padding: 28px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .milestone-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .milestone-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4a6fa5;
+            padding-bottom: 16px;
+        }
+
+        .milestone-icon {
+            font-size: 32px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .milestone-header h3 {
+            margin: 0;
+            color: #60a5fa;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .milestone-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .milestone-stats {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            color: #94a3b8;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .milestone-levels {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .level-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .level-label {
+            width: 40px;
+            font-weight: bold;
+            color: #60a5fa;
+            font-size: 15px;
+        }
+
+        .level-bar-container {
+            flex: 1;
+            height: 24px;
+            background: #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .level-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+            border-radius: 12px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .level-bar-fill.filled {
+            background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
+            animation: fillGlow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes fillGlow {
+            0%, 100% { box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
+            50% { box-shadow: 0 0 16px rgba(34, 197, 94, 0.6); }
+        }
+
+        .level-amount {
+            font-size: 13px;
+            color: #94a3b8;
+            min-width: 200px;
+            font-weight: 500;
+        }
+
+        .milestone-insight {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 16px 20px;
+            border-radius: 12px;
+            color: #fbbf24;
+            border-left: 4px solid #fbbf24;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .milestone-connector {
+            font-size: 28px;
+            color: #4a6fa5;
+            margin: 12px 0;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* Retirement transformation special styling */
+        .retirement-transform {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f4c3a 100%);
+            border: 2px solid #22c55e;
+            box-shadow: 0 0 24px rgba(34, 197, 94, 0.3);
+        }
+
+        .transformation-visual {
+            margin: 20px 0;
+        }
+
+        .transform-label {
+            color: #60a5fa;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .bucket-visual {
+            display: flex;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .bucket-card {
+            flex: 1;
+            padding: 20px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .bucket-card:hover {
+            transform: scale(1.05);
+        }
+
+        .bucket-card.b1 {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        }
+
+        .bucket-card.b2 {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .bucket-card.b3 {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        }
+
+        .bucket-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .bucket-amount {
+            font-size: 20px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .bucket-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        .refill-visual {
+            margin: 20px 0;
+        }
+
+        .refill-status {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .bucket-status {
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .b1-depleted {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            border-left: 4px solid #ef4444;
+        }
+
+        .b2-waiting {
+            background: rgba(168, 85, 247, 0.2);
+            color: #c4b5fd;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .b3-grown {
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
+            border-left: 4px solid #22c55e;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .journey-input-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .milestone-stats {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .bucket-visual {
+                flex-direction: column;
+            }
+
+            .level-amount {
+                min-width: 150px;
+                font-size: 11px;
+            }
+
+            .milestone-header h3 {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1834,6 +2171,7 @@
             <button class="tab-btn" data-tab="retirement">🏖️ Retirement Buckets</button>
             <button class="tab-btn" data-tab="calculator">🧮 Calculators</button>
             <button class="tab-btn" data-tab="rules">📋 Rules</button>
+            <button class="tab-btn" data-tab="journey">🚀 Journey</button>
         </div>
 
         <!-- Guide/Introduction Tab -->
@@ -1920,14 +2258,16 @@
                             <div class="level-badge">L3</div>
                             <div class="level-info">
                                 <h4>Long-Term Wealth — All Remaining Surplus</h4>
-                                <p><strong>Purpose:</strong> Retirement corpus, financial freedom</p>
+                                <p><strong>Purpose:</strong> ALL long-term goals (5+ years away)</p>
+                                <p><strong>Includes:</strong> Retirement, Child Education, Child Marriage, Dream Home, etc.</p>
                                 <p><strong>Where:</strong> Equity SIPs (Large Cap + Flexi Cap + Mid/Small Cap)</p>
                                 <p><strong>Rules:</strong></p>
                                 <ul style="margin-left: 20px; color: #94a3b8;">
                                     <li>✅ Tax harvest ₹1.25L LTCG annually (March)</li>
                                     <li>✅ Rebalance if allocation drifts >10%</li>
                                     <li>✅ Step-up SIPs 10-15% yearly</li>
-                                    <li>❌ Never redeem for consumption before retirement</li>
+                                    <li>⚠️ For non-retirement goals: Shift to debt 2-3 years before goal date</li>
+                                    <li>⚠️ At retirement: Transform to 3-Bucket system for ongoing withdrawals</li>
                                 </ul>
                             </div>
                         </div>
@@ -2561,8 +2901,8 @@
                         <div class="rule-item dont">
                             <span class="rule-icon">❌</span>
                             <div>
-                                <strong>Never Redeem for Consumption</strong>
-                                <p>L3 is only for retirement/long-term wealth. Use L1/L2 for all other needs.</p>
+                                <strong>Never Redeem Early (Except Planned Goals)</strong>
+                                <p>L3 is for ALL long-term goals (5+ years). Shift to debt 2-3 years before goal. Use L1/L2 for short-term needs.</p>
                             </div>
                         </div>
                         <div class="rule-item dont">
@@ -3196,6 +3536,51 @@
                 </p>
             </div>
         </div>
+
+        <!-- Journey Visualizer Tab -->
+        <div id="journey" class="tab-content">
+            <div class="journey-container">
+                <!-- Input Section -->
+                <div class="journey-inputs">
+                    <h3 style="margin-top: 0; color: #60a5fa;">🚀 Your Financial Journey</h3>
+                    <p style="color: #94a3b8; margin-bottom: 24px;">Visualize your path from today to retirement. See exactly how money flows through the 4 levels and transforms into the 3-bucket system.</p>
+
+                    <div class="journey-input-grid">
+                        <div class="input-row">
+                            <label>Current Age</label>
+                            <input type="number" id="journey-age" value="25" min="18" max="60">
+                        </div>
+                        <div class="input-row">
+                            <label>Retirement Age</label>
+                            <input type="number" id="journey-retire-age" value="50" min="30" max="70">
+                        </div>
+                        <div class="input-row">
+                            <label>Monthly Salary (₹)</label>
+                            <input type="number" id="journey-salary" value="100000" step="10000">
+                        </div>
+                        <div class="input-row">
+                            <label>Monthly Expenses (₹)</label>
+                            <input type="number" id="journey-expenses" value="50000" step="5000">
+                        </div>
+                        <div class="input-row">
+                            <label>Annual Salary Growth (%)</label>
+                            <input type="number" id="journey-salary-growth" value="10" min="0" max="20" step="1">
+                        </div>
+                        <div class="input-row">
+                            <label>Annual Expense Growth (%)</label>
+                            <input type="number" id="journey-expense-growth" value="8" min="0" max="15" step="1">
+                        </div>
+                    </div>
+
+                    <button class="generate-journey-btn" onclick="generateJourney()">Generate My Journey</button>
+                </div>
+
+                <!-- Timeline Section -->
+                <div class="journey-timeline" id="journey-timeline">
+                    <p style="color: #94a3b8; text-align: center; padding: 40px;">Click "Generate My Journey" to visualize your financial path</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -3783,6 +4168,366 @@
 
         // Initialize goals display
         renderGoals();
+
+        // ===== JOURNEY VISUALIZER =====
+
+        function generateJourney() {
+            const age = parseInt(document.getElementById('journey-age').value) || 25;
+            const retireAge = parseInt(document.getElementById('journey-retire-age').value) || 50;
+            const salary = parseFloat(document.getElementById('journey-salary').value) || 100000;
+            const expenses = parseFloat(document.getElementById('journey-expenses').value) || 50000;
+            const salaryGrowth = parseFloat(document.getElementById('journey-salary-growth').value) / 100 || 0.10;
+            const expenseGrowth = parseFloat(document.getElementById('journey-expense-growth').value) / 100 || 0.08;
+
+            const surplus = salary - expenses;
+            const l0Target = Math.max(50000, expenses);
+            const l1Target = expenses * 6;
+            const l2Target = expenses * 3; // Buffer for unplanned goals
+
+            // Calculate months to fill each level
+            const monthsToL0 = Math.ceil(l0Target / surplus);
+            const monthsToL1 = Math.ceil(l1Target / surplus);
+            const monthsToL2 = Math.ceil(l2Target / surplus);
+            const monthsToFoundation = monthsToL0 + monthsToL1 + monthsToL2;
+
+            // Generate milestones array
+            const milestones = [];
+
+            // Milestone 1: Starting point
+            milestones.push({
+                age: age,
+                ageLabel: `AGE ${age} - STARTING OUT`,
+                salary: salary,
+                expenses: expenses,
+                surplus: surplus,
+                l0: { current: 0, target: l0Target, filled: false },
+                l1: { current: 0, target: l1Target, filled: false },
+                l2: { current: 0, target: l2Target, filled: false },
+                l3: { current: 0, target: '∞', filled: false },
+                insight: 'All surplus flows to L0 first',
+                icon: '🚀'
+            });
+
+            // Milestone 2: L0 filled
+            milestones.push({
+                age: age,
+                ageLabel: `AGE ${age} + ${monthsToL0} MONTH${monthsToL0 > 1 ? 'S' : ''}`,
+                salary: salary,
+                expenses: expenses,
+                surplus: surplus,
+                l0: { current: l0Target, target: l0Target, filled: true },
+                l1: { current: 0, target: l1Target, filled: false },
+                l2: { current: 0, target: l2Target, filled: false },
+                l3: { current: 0, target: '∞', filled: false },
+                insight: 'L0 complete! Now filling L1 (Arbitrage Fund)',
+                icon: '✅'
+            });
+
+            // Milestone 3: L1 filled
+            const l1CompleteMonths = monthsToL0 + monthsToL1;
+            milestones.push({
+                age: age,
+                ageLabel: `AGE ${age} + ${l1CompleteMonths} MONTHS`,
+                salary: salary,
+                expenses: expenses,
+                surplus: surplus,
+                l0: { current: l0Target, target: l0Target, filled: true },
+                l1: { current: l1Target, target: l1Target, filled: true },
+                l2: { current: 0, target: l2Target, filled: false },
+                l3: { current: 0, target: '∞', filled: false },
+                insight: 'L1 units aging. After 12 months = tax-free redemption',
+                icon: '⏰'
+            });
+
+            // Milestone 4: L2 filled (Foundation complete)
+            milestones.push({
+                age: Math.floor(age + monthsToFoundation / 12),
+                ageLabel: `AGE ${Math.floor(age + monthsToFoundation / 12)} - FOUNDATION COMPLETE!`,
+                salary: salary,
+                expenses: expenses,
+                surplus: surplus,
+                l0: { current: l0Target, target: l0Target, filled: true },
+                l1: { current: l1Target, target: l1Target, filled: true },
+                l2: { current: l2Target, target: l2Target, filled: true },
+                l3: { current: 0, target: '∞', filled: false },
+                insight: 'Foundation complete! L3 begins 🚀 All surplus now builds wealth',
+                icon: '🎉'
+            });
+
+            // Milestone 5: L1 Matures (12 months from start)
+            if (monthsToFoundation < 12) {
+                milestones.push({
+                    age: age + 1,
+                    ageLabel: `AGE ${age + 1} - L1 MATURES`,
+                    salary: salary,
+                    expenses: expenses,
+                    surplus: surplus,
+                    l0: { current: l0Target, target: l0Target, filled: true },
+                    l1: { current: l1Target, target: l1Target, filled: true },
+                    l2: { current: l2Target, target: l2Target, filled: true },
+                    l3: { current: surplus * (12 - monthsToFoundation), target: '∞', filled: false },
+                    insight: 'Oldest L1 units now 12+ months → TAX-FREE to redeem',
+                    icon: '🎯'
+                });
+            }
+
+            // Milestone 6: 5 Years In
+            const fiveYears = 5;
+            if (retireAge - age > fiveYears) {
+                const sal5 = salary * Math.pow(1 + salaryGrowth, fiveYears);
+                const exp5 = expenses * Math.pow(1 + expenseGrowth, fiveYears);
+                const surp5 = sal5 - exp5;
+
+                // Calculate L3 growth (approx)
+                const monthlyRate = 0.12 / 12;
+                const months5 = fiveYears * 12 - monthsToFoundation;
+                const l3Value5 = surplus * ((Math.pow(1 + monthlyRate, months5) - 1) / monthlyRate) * (1 + monthlyRate);
+
+                milestones.push({
+                    age: age + fiveYears,
+                    ageLabel: `AGE ${age + fiveYears} - 5 YEARS IN`,
+                    salary: sal5,
+                    expenses: exp5,
+                    surplus: surp5,
+                    l0: { current: Math.max(50000, exp5), target: Math.max(50000, exp5), filled: true },
+                    l1: { current: exp5 * 6, target: exp5 * 6, filled: true },
+                    l2: { current: exp5 * 3, target: exp5 * 3, filled: true },
+                    l3: { current: l3Value5, target: '∞', filled: false },
+                    insight: 'L3 compounding. Stay the course. Wealth building!',
+                    icon: '📈'
+                });
+            }
+
+            // Milestone 7: Mid-Journey (halfway to retirement)
+            const midYears = Math.floor((retireAge - age) / 2);
+            if (midYears > 5 && midYears < retireAge - age - 3) {
+                const salMid = salary * Math.pow(1 + salaryGrowth, midYears);
+                const expMid = expenses * Math.pow(1 + expenseGrowth, midYears);
+                const surpMid = salMid - expMid;
+
+                const monthlyRate = 0.12 / 12;
+                const monthsMid = midYears * 12 - monthsToFoundation;
+                const l3ValueMid = surplus * ((Math.pow(1 + monthlyRate, monthsMid) - 1) / monthlyRate) * (1 + monthlyRate);
+
+                milestones.push({
+                    age: age + midYears,
+                    ageLabel: `AGE ${age + midYears} - MID-JOURNEY`,
+                    salary: salMid,
+                    expenses: expMid,
+                    surplus: surpMid,
+                    l0: { current: Math.max(50000, expMid), target: Math.max(50000, expMid), filled: true },
+                    l1: { current: expMid * 6, target: expMid * 6, filled: true },
+                    l2: { current: expMid * 3, target: expMid * 3, filled: true },
+                    l3: { current: l3ValueMid, target: '∞', filled: false },
+                    insight: 'Halfway there! Time to review goals and rebalance',
+                    icon: '🎯'
+                });
+            }
+
+            // Milestone 8: 3 Years Before Retirement
+            if (retireAge - age > 3) {
+                const pre3Years = retireAge - 3;
+                const yearsToPre3 = pre3Years - age;
+                const salPre3 = salary * Math.pow(1 + salaryGrowth, yearsToPre3);
+                const expPre3 = expenses * Math.pow(1 + expenseGrowth, yearsToPre3);
+                const surpPre3 = salPre3 - expPre3;
+
+                const monthlyRate = 0.12 / 12;
+                const monthsPre3 = yearsToPre3 * 12 - monthsToFoundation;
+                const l3ValuePre3 = surplus * ((Math.pow(1 + monthlyRate, monthsPre3) - 1) / monthlyRate) * (1 + monthlyRate);
+
+                milestones.push({
+                    age: pre3Years,
+                    ageLabel: `AGE ${pre3Years} - 3 YEARS BEFORE RETIREMENT`,
+                    salary: salPre3,
+                    expenses: expPre3,
+                    surplus: surpPre3,
+                    l0: { current: Math.max(50000, expPre3), target: Math.max(50000, expPre3), filled: true },
+                    l1: { current: expPre3 * 6, target: expPre3 * 6, filled: true },
+                    l2: { current: expPre3 * 3, target: expPre3 * 3, filled: true },
+                    l3: { current: l3ValuePre3, target: '∞', filled: false },
+                    insight: 'De-risking begins. Gradually shift retirement portion to safer assets',
+                    icon: '⚠️'
+                });
+            }
+
+            // Milestone 9: Retirement Day!
+            const yearsToRetire = retireAge - age;
+            const salRetire = salary * Math.pow(1 + salaryGrowth, yearsToRetire);
+            const expRetire = expenses * Math.pow(1 + expenseGrowth, yearsToRetire);
+
+            const monthlyRate = 0.12 / 12;
+            const monthsRetire = yearsToRetire * 12 - monthsToFoundation;
+            const l3ValueRetire = surplus * ((Math.pow(1 + monthlyRate, monthsRetire) - 1) / monthlyRate) * (1 + monthlyRate);
+
+            const b1Amount = expRetire * 12 * 3; // 3 years
+            const b2Amount = expRetire * 12 * 3; // 3 years
+            const b3Amount = l3ValueRetire - b1Amount - b2Amount;
+
+            milestones.push({
+                age: retireAge,
+                ageLabel: `AGE ${retireAge} - RETIREMENT! 🎉`,
+                salary: 0,
+                expenses: expRetire,
+                surplus: 0,
+                l0: { current: 0, target: 0, filled: false },
+                l1: { current: 0, target: 0, filled: false },
+                l2: { current: 0, target: 0, filled: false },
+                l3: { current: 0, target: 0, filled: false },
+                retirement: {
+                    corpus: l3ValueRetire,
+                    b1: b1Amount,
+                    b2: b2Amount,
+                    b3: b3Amount,
+                    monthlyExpense: expRetire
+                },
+                insight: 'L3 transforms into 3-Bucket system! 6-year buffer protects from market crashes',
+                icon: '🏖️',
+                isRetirement: true
+            });
+
+            // Milestone 10: Retirement Year 3 (First Refill)
+            milestones.push({
+                age: retireAge + 3,
+                ageLabel: `AGE ${retireAge + 3} - FIRST REFILL CYCLE`,
+                salary: 0,
+                expenses: expRetire * Math.pow(1 + expenseGrowth, 3),
+                surplus: 0,
+                l0: { current: 0, target: 0, filled: false },
+                l1: { current: 0, target: 0, filled: false },
+                l2: { current: 0, target: 0, filled: false },
+                l3: { current: 0, target: 0, filled: false },
+                retirement: {
+                    corpus: l3ValueRetire,
+                    b1: 0, // Depleted
+                    b2: b2Amount,
+                    b3: b3Amount * 1.36, // Grown at 12% for 3 years
+                    monthlyExpense: expRetire * Math.pow(1 + expenseGrowth, 3)
+                },
+                insight: 'B1 depleted → Refill from B2. B3 has grown! Markets above 200-DMA? Refill B2 from B3',
+                icon: '🔄',
+                isRetirement: true
+            });
+
+            renderJourney(milestones);
+        }
+
+        function renderJourney(milestones) {
+            const container = document.getElementById('journey-timeline');
+            container.innerHTML = milestones.map((m, index) => {
+                if (m.isRetirement) {
+                    return renderRetirementMilestone(m, index < milestones.length - 1);
+                } else {
+                    return renderWorkingMilestone(m, index < milestones.length - 1);
+                }
+            }).join('');
+        }
+
+        function renderWorkingMilestone(m, showConnector) {
+            return `
+                <div class="milestone-card">
+                    <div class="milestone-header">
+                        <span class="milestone-icon">${m.icon}</span>
+                        <h3>${m.ageLabel}</h3>
+                    </div>
+                    <div class="milestone-body">
+                        <div class="milestone-stats">
+                            <span>💰 Salary: ${formatIndianCurrency(m.salary)}/mo</span>
+                            <span>💸 Expenses: ${formatIndianCurrency(m.expenses)}/mo</span>
+                            <span>✅ Surplus: ${formatIndianCurrency(m.surplus)}/mo</span>
+                        </div>
+                        <div class="milestone-levels">
+                            ${renderLevelBar('L0', m.l0)}
+                            ${renderLevelBar('L1', m.l1)}
+                            ${renderLevelBar('L2', m.l2)}
+                            ${renderLevelBar('L3', m.l3)}
+                        </div>
+                        <div class="milestone-insight">
+                            <span>💡 ${m.insight}</span>
+                        </div>
+                    </div>
+                </div>
+                ${showConnector ? '<div class="milestone-connector">▼</div>' : ''}
+            `;
+        }
+
+        function renderRetirementMilestone(m, showConnector) {
+            return `
+                <div class="milestone-card retirement-transform">
+                    <div class="milestone-header">
+                        <span class="milestone-icon">${m.icon}</span>
+                        <h3>${m.ageLabel}</h3>
+                    </div>
+                    <div class="milestone-body">
+                        <div class="milestone-stats">
+                            <span>📦 Total Corpus: ${formatIndianCurrency(m.retirement.corpus)}</span>
+                            <span>💸 Monthly Expense: ${formatIndianCurrency(m.retirement.monthlyExpense)}/mo</span>
+                        </div>
+
+                        ${m.age === m.age && m.retirement.b1 === 0 ? '' : `
+                        <div class="transformation-visual">
+                            <div class="transform-label">L3 Equity Pool Transforms Into:</div>
+                            <div class="bucket-visual">
+                                <div class="bucket-card b1">
+                                    <div class="bucket-label">B1 - SPEND</div>
+                                    <div class="bucket-amount">${formatIndianCurrency(m.retirement.b1)}</div>
+                                    <div class="bucket-desc">3 years<br>Liquid/Arbitrage<br>SWP Source</div>
+                                </div>
+                                <div class="bucket-card b2">
+                                    <div class="bucket-label">B2 - REFILL</div>
+                                    <div class="bucket-amount">${formatIndianCurrency(m.retirement.b2)}</div>
+                                    <div class="bucket-desc">3 years<br>Debt/Hybrid<br>Refills B1</div>
+                                </div>
+                                <div class="bucket-card b3">
+                                    <div class="bucket-label">B3 - GROW</div>
+                                    <div class="bucket-amount">${formatIndianCurrency(m.retirement.b3)}</div>
+                                    <div class="bucket-desc">Rest<br>Equity<br>Refills B2</div>
+                                </div>
+                            </div>
+                        </div>
+                        `}
+
+                        ${m.retirement.b1 === 0 ? `
+                        <div class="refill-visual">
+                            <div class="refill-status">
+                                <div class="bucket-status b1-depleted">
+                                    <strong>B1:</strong> Depleted (spent over 3 years)
+                                </div>
+                                <div class="bucket-status b2-waiting">
+                                    <strong>B2:</strong> ${formatIndianCurrency(m.retirement.b2)} waiting
+                                </div>
+                                <div class="bucket-status b3-grown">
+                                    <strong>B3:</strong> ${formatIndianCurrency(m.retirement.b3)} (grown @12%)
+                                </div>
+                            </div>
+                        </div>
+                        ` : ''}
+
+                        <div class="milestone-insight">
+                            <span>💡 ${m.insight}</span>
+                        </div>
+                    </div>
+                </div>
+                ${showConnector ? '<div class="milestone-connector">▼</div>' : ''}
+            `;
+        }
+
+        function renderLevelBar(level, data) {
+            const percent = data.target === '∞' ? 0 : Math.min(100, (data.current / data.target) * 100);
+            const status = data.filled ? ' ✅' : '';
+            const targetDisplay = data.target === '∞' ? '∞' : formatIndianCurrency(data.target);
+
+            return `
+                <div class="level-bar-row">
+                    <span class="level-label">${level}</span>
+                    <div class="level-bar-container">
+                        <div class="level-bar-fill ${data.filled ? 'filled' : ''}" style="width: ${percent}%"></div>
+                    </div>
+                    <span class="level-amount">${formatIndianCurrency(data.current)} → ${targetDisplay}${status}</span>
+                </div>
+            `;
+        }
+
     </script>
 </body>
 </html>
