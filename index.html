@@ -1893,11 +1893,11 @@
                         <div class="level-explain-card l1">
                             <div class="level-badge">L1</div>
                             <div class="level-info">
-                                <h4>Emergency Fund — 6 Months Expenses</h4>
-                                <p><strong>Purpose:</strong> Job loss, deductibles, urgent repairs (not major medical — that's insurance)</p>
+                                <h4>Tax-Efficient Liquid Reserve — 6 Months Expenses</h4>
+                                <p><strong>Purpose:</strong> Second savings layer with units aged 12+ months for tax-free redemption</p>
                                 <p><strong>Where:</strong> Arbitrage Fund (15%+ bracket) or Liquid Fund (lower brackets)</p>
-                                <p><strong>Rule:</strong> Only use for genuine emergencies. Rebuild immediately after use.</p>
-                                <p><strong>⚠️ Note:</strong> Arbitrage STCG is 20% if held < 12 months. Plan for 12+ month holding.</p>
+                                <p><strong>How it works:</strong> Pay via L0/Credit Card → 30-45 day buffer → Redeem aged L1 units → 0% LTCG</p>
+                                <p><strong>Note:</strong> Major medical = Health Insurance (not L1). L1 is for tax-optimized liquidity, not "emergencies".</p>
                             </div>
                         </div>
                         
@@ -1909,8 +1909,8 @@
                                 <h4>Goal-Based Savings — Based on Your Goals</h4>
                                 <p><strong>Purpose:</strong> Specific planned goals (car, vacation, wedding) with 1-5 year timeline</p>
                                 <p><strong>Where:</strong> Arbitrage (1-2yr), Equity Savings (2-3yr), Balanced Advantage (3-5yr)</p>
-                                <p><strong>Rule:</strong> No goals = No L2 needed. Money goes straight to L3.</p>
-                                <p><strong>Key:</strong> L2 = Sum of your specific goals. Use the Goal Planner to calculate.</p>
+                                <p><strong>Rule:</strong> L2 = MAX(sum of goals, 3 months expenses). Always maintains a buffer.</p>
+                                <p><strong>Key:</strong> Even with no goals, keeps 3-month buffer for future unplanned goals. Units age 12+ months for better tax treatment.</p>
                             </div>
                         </div>
                         
@@ -2052,7 +2052,7 @@
                                     <li><strong>ISR Calculator:</strong> Find out how much corpus you need</li>
                                     <li><strong>SIP Calculator:</strong> Project your SIP growth with annual step-up option</li>
                                     <li><strong>Lump Sum Calculator:</strong> Calculate growth of one-time investments</li>
-                                    <li><strong>Emergency Fund:</strong> Calculate ideal emergency fund size</li>
+                                    <li><strong>L0 + L1 Calculator:</strong> Calculate your liquid reserve size</li>
                                     <li><strong>Time to Goal:</strong> See how long to reach any target</li>
                                 </ul>
                             </div>
@@ -2177,7 +2177,7 @@
                         <div class="alloc-card l1-alloc">
                             <div class="alloc-header">
                                 <span class="alloc-level">L1</span>
-                                <span class="alloc-name">Emergency Fund</span>
+                                <span class="alloc-name">Liquid Reserve</span>
                             </div>
                             <div class="alloc-amount" id="alloc-l1">₹3,00,000</div>
                             <div class="alloc-fund" id="fund-l1">Arbitrage Fund</div>
@@ -2305,8 +2305,8 @@
                 <div class="fund-category-grid">
                     <div class="fund-category" id="cat-emergency">
                         <div class="cat-header emergency">
-                            <span class="cat-icon">🛡️</span>
-                            <h4>Emergency Fund (L1)</h4>
+                            <span class="cat-icon">💰</span>
+                            <h4>Liquid Reserve (L1)</h4>
                         </div>
                         <div class="cat-body">
                             <div class="recommended-for">
@@ -2324,7 +2324,7 @@
                                 </ul>
                             </div>
                             <div class="cat-note">
-                                <strong>⚠️ STCG Note:</strong> If you redeem arbitrage within 12 months, tax is 20% (not 0%). Plan for 12+ month holding.
+                                <strong>💡 How it works:</strong> Pay via L0/Credit Card → Get 30-45 days → Redeem L1 units aged 12+ months → 0% LTCG tax.
                             </div>
                         </div>
                     </div>
@@ -2351,7 +2351,7 @@
                                 </ul>
                             </div>
                             <div class="cat-note">
-                                <strong>Key:</strong> L2 = Sum of your specific goals. No goals? L2 = ₹0, money goes to L3.
+                                <strong>Key:</strong> L2 = MAX(sum of goals, 3 months expenses). Always maintains a buffer for unplanned goals.
                             </div>
                         </div>
                     </div>
@@ -2586,7 +2586,7 @@
             <!-- Goal Planner for L2 -->
             <div class="goal-planner-section" id="goal-planner">
                 <h3>🎯 L2 Goal Planner</h3>
-                <p style="color: #94a3b8; margin-bottom: 20px;">L2 is for <strong>specific planned goals only</strong>. No goals = No L2 needed (money goes to L3). Add your goals below:</p>
+                <p style="color: #94a3b8; margin-bottom: 20px;"><strong>L2 = MAX(sum of goals, 3 months expenses)</strong>. Even with no goals, maintains a 3-month buffer for future unplanned goals. Units age 12+ months for better tax treatment. Add your specific goals below:</p>
                 
                 <div class="goal-input-form">
                     <div class="goal-inputs">
@@ -2797,8 +2797,8 @@
                         <div class="level-title">
                             <div class="level-number">L1</div>
                             <div class="level-name">
-                                <h3>Emergency Fund</h3>
-                                <span>6 Months Expenses • Arbitrage/Liquid Fund</span>
+                                <h3>Tax-Efficient Liquid Reserve</h3>
+                                <span>6 Months Expenses • Aged Units for 0% LTCG</span>
                             </div>
                         </div>
                         <div class="level-target">
@@ -3064,10 +3064,10 @@
                     </div>
                 </div>
 
-                <!-- Emergency Fund Calculator -->
+                <!-- Liquid Reserve Calculator -->
                 <div class="calc-card">
-                    <h3>🛡️ Emergency Fund Calculator</h3>
-                    <p style="color: #94a3b8; margin-bottom: 20px;">Calculate your ideal emergency fund</p>
+                    <h3>💰 L0 + L1 Calculator</h3>
+                    <p style="color: #94a3b8; margin-bottom: 20px;">Calculate your liquid reserve (L0 bank buffer + L1 tax-efficient reserve)</p>
                     
                     <div class="calc-input">
                         <label>Monthly Expenses (₹)</label>
@@ -3087,9 +3087,9 @@
                     <button class="calc-btn" onclick="calculateEF()">Calculate</button>
                     
                     <div class="calc-result" id="ef-result" style="display: none;">
-                        <h4>Emergency Fund Target</h4>
+                        <h4>Liquid Reserve Target</h4>
                         <div class="result-row">
-                            <span>Recommended Amount</span>
+                            <span>Total L0 + L1</span>
                             <span class="result-value" id="ef-amount">₹3,00,000</span>
                         </div>
                         <div class="result-row">
@@ -3404,8 +3404,9 @@
             // Calculate recommended allocations - DYNAMIC based on expenses
             const l0Amount = Math.max(50000, expenses); // Minimum ₹50k OR 1 month expenses
             const l1Amount = expenses * 6; // 6 months expenses
-            // L2 is now goal-based, calculated separately
+            // L2 = MAX(sum of goals, 3 months expenses) - calculated separately in updateL2Display()
             const totalGoals = goals.reduce((sum, g) => sum + g.amount, 0);
+            const l2Amount = Math.max(totalGoals, expenses * 3);
             
             // SIP recommendation (80% of surplus after buffer needs are met)
             const recommendedSIP = Math.max(surplus * 0.8, 0);
@@ -3627,7 +3628,7 @@
                 document.getElementById('fund-l1').textContent = 'Liquid Fund (SEBI: Debt)';
             }
             
-            // L2 is now goal-based, so show appropriate message
+            // L2 = MAX(sum of goals, 3 months expenses) - handled by updateL2Display()
             const totalGoals = goals.reduce((sum, g) => sum + g.amount, 0);
             if (totalGoals > 0) {
                 document.getElementById('fund-l2').textContent = 'Goal-based (see planner)';
@@ -3693,7 +3694,11 @@
         function updateL2Display() {
             const totalGoals = goals.reduce((sum, g) => sum + g.amount, 0);
             const expenses = parseFloat(document.getElementById('plan-expenses').value) || 50000;
-            
+
+            // L2 = MAX(sum of goals, 3 months expenses)
+            const minL2Buffer = expenses * 3;
+            const l2Target = Math.max(totalGoals, minL2Buffer);
+
             // Calculate monthly investment needed (simplified - assumes 8% return)
             let monthlyNeeded = 0;
             goals.forEach(goal => {
@@ -3702,17 +3707,21 @@
                 // PMT formula
                 monthlyNeeded += goal.amount / (((Math.pow(1 + rate, months) - 1) / rate) * (1 + rate));
             });
-            
+
             document.getElementById('total-l2-goals').textContent = formatIndianCurrency(totalGoals);
             document.getElementById('monthly-l2-needed').textContent = formatIndianCurrency(Math.round(monthlyNeeded));
-            
-            // Update allocation card
+
+            // Update allocation card with new logic
+            document.getElementById('alloc-l2').textContent = formatIndianCurrency(l2Target);
+
             if (totalGoals > 0) {
-                document.getElementById('alloc-l2').textContent = formatIndianCurrency(totalGoals);
-                document.getElementById('fund-l2').textContent = `${goals.length} goal${goals.length > 1 ? 's' : ''} tracked`;
+                if (totalGoals >= minL2Buffer) {
+                    document.getElementById('fund-l2').textContent = `${goals.length} goal${goals.length > 1 ? 's' : ''} tracked`;
+                } else {
+                    document.getElementById('fund-l2').textContent = `${goals.length} goal${goals.length > 1 ? 's' : ''} + 3-month buffer`;
+                }
             } else {
-                document.getElementById('alloc-l2').textContent = '₹0 (No goals)';
-                document.getElementById('fund-l2').textContent = 'Add goals below ↓';
+                document.getElementById('fund-l2').textContent = '3-month expense buffer (unplanned goals)';
             }
         }
 

@@ -111,8 +111,13 @@ Money only flows to the next level when the current level is full. This ensures 
 
 **Medical emergencies** → Health Insurance (prerequisite, not L1)
 
-### Goal-Based L2
-Unlike traditional emergency funds, L2 is **not a fixed amount**. It's the sum of your specific goals. No goals = ₹0 in L2.
+### L2 = Planned Goals + Unplanned Buffer
+L2 is **not a fixed amount** — it adapts to your needs:
+- **Formula:** `L2 = MAX(sum of goals, 3 months expenses)`
+- Even with zero planned goals, maintains a 3-month expense buffer
+- Buffer grows at ~8-10% in hybrid funds while units age
+- When goals appear, units are already 12+ months old → Better tax treatment (LTCG 12.5% vs STCG 20%)
+- Prevents need to redeem L3 equity for unexpected goals
 
 ### Tax-Optimized Choices
 - **15%+ bracket**: Arbitrage funds save 2.5-17.5% tax vs liquid funds

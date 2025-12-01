@@ -35,7 +35,7 @@ The levels are designed to **keep MF units in the right place for the right amou
 |-------|---------|---------------|-------------------|
 | **L0** | Bank Buffer — instant access for daily ops | MAX(₹50k, 1 month expenses) | Savings Account |
 | **L1** | Tax-Efficient Liquid Reserve — units aged 12+ months for 0% LTCG | 6 months expenses | Arbitrage Fund (15%+ bracket) or Liquid Fund (lower brackets) |
-| **L2** | Goal-Based Savings — money parked for specific planned goals | Sum of specific goals | Based on timeline: 1-2yr → Arbitrage, 2-3yr → Equity Savings, 3-5yr → Balanced Advantage |
+| **L2** | Goal-Based Savings — money parked for specific planned goals | MAX(sum of goals, 3 months expenses) | Based on timeline: 1-2yr → Arbitrage, 2-3yr → Equity Savings, 3-5yr → Balanced Advantage |
 | **L3** | Long-Term Wealth — never touch until retirement | All remaining surplus | Equity SIPs (Large Cap + Flexi Cap + Mid/Small Cap) |
 
 **Key Rule:** Money only flows to next level when current level is full.
@@ -51,7 +51,13 @@ The levels are designed to **keep MF units in the right place for the right amou
 - L1 is simply a **tax-efficient second savings layer** with aged units ready for redemption
 - The "emergency" framing is misleading — it's really about tax-optimized liquidity
 
-**L2 is Goal-Based:** If user has no specific goals, L2 = ₹0 and money goes directly to L3.
+**L2 = Planned Goals + Unplanned Buffer:**
+- Formula: `L2 = MAX(sum of goals, 3 months expenses)`
+- Even with zero planned goals, L2 has a minimum 3-month expense buffer
+- This buffer grows at ~8-10% (Equity Savings/Balanced Advantage funds)
+- Units age 12+ months → Lower LTCG (12.5%) vs STCG (20%) when goals appear
+- **Key benefit:** Prevents need to redeem from L3 (equity) when unexpected goals arise
+- **Tax timing advantage:** By the time you need it, units are already aged for better tax treatment
 
 ---
 
@@ -166,11 +172,14 @@ The levels are designed to **keep MF units in the right place for the right amou
 - Selection criteria provided: "AUM > ₹1,000 Cr, Expense Ratio < 1%"
 - Avoids the tool becoming outdated when fund performance changes
 
-### 2. L2 is Goal-Based (Not Fixed Amount)
+### 2. L2 = Planned Goals + Unplanned Buffer (Not Fixed Amount)
 - Previous version had fixed ₹2-3L for L2
-- Now: L2 = Sum of user's specific goals
-- No goals = No L2 needed, money goes to L3
-- Goal Planner allows adding goals with name, amount, timeline
+- Earlier iteration: L2 = Sum of goals (problem: no buffer for future goals)
+- **Current logic:** `L2 = MAX(sum of goals, 3 months expenses)`
+- Even with zero goals, L2 maintains 3-month expense buffer
+- **Reasoning:** Prevents need to redeem L3 equity when unexpected goals appear (car, wedding, travel)
+- Units age 12+ months in hybrid funds → Better tax treatment (LTCG 12.5% vs STCG 20%)
+- Goal Planner allows adding/removing specific goals with name, amount, timeline
 
 ### 3. Dynamic L0/L1 (Not Fixed)
 - L0 = MAX(₹50,000, 1 month expenses)
