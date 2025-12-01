@@ -10,23 +10,46 @@ A single-page interactive HTML financial planning tool for Indian investors. Bui
 
 ## Core Philosophy
 
-The system has **two phases**:
+The system is designed around **keeping money in the right place for the right amount of time** for tax efficiency:
 
-1. **Working Years (4-Level System):** Money flows like a waterfall through L0 → L1 → L2 → L3
-2. **Retirement (3-Bucket System):** Corpus is divided into 3 buckets to protect against sequence-of-returns risk
+### Working Years (4-Level System)
+Money flows like a waterfall through L0 → L1 → L2 → L3. Each level has a specific **holding period purpose**:
+
+- **L0 (Bank):** Instant access. Pay daily expenses or credit card bills.
+- **L1 (Arbitrage/Liquid):** Units sit here 12+ months. When you need cash beyond L0, you have 30-45 days (via CC billing cycle) to redeem aged units at 0% LTCG.
+- **L2 (Goal-based):** Money parked for specific goals with 1-5 year timeline.
+- **L3 (Equity):** Never touch until retirement. Compound for decades.
+
+**The key insight:** L0 + Credit Card creates a TIME BUFFER that allows L1 units to age 12+ months before redemption → tax-free gains.
+
+### Retirement (3-Bucket System)
+Corpus is divided into 3 buckets to protect against sequence-of-returns risk.
 
 ---
 
 ## The 4-Level System (Accumulation Phase)
 
+The levels are designed to **keep MF units in the right place for the right amount of time** for tax efficiency:
+
 | Level | Purpose | Target Amount | Recommended Funds |
 |-------|---------|---------------|-------------------|
-| **L0** | Bank Buffer | MAX(₹50k, 1 month expenses) | Savings Account |
-| **L1** | Emergency Fund | 6 months expenses | Arbitrage Fund (15%+ bracket) or Liquid Fund (lower brackets) |
-| **L2** | Goal-Based Savings | Sum of specific goals | Based on timeline: 1-2yr → Arbitrage, 2-3yr → Equity Savings, 3-5yr → Balanced Advantage |
-| **L3** | Long-Term Wealth | All remaining surplus | Equity SIPs (Large Cap + Flexi Cap + Mid/Small Cap) |
+| **L0** | Bank Buffer — instant access for daily ops | MAX(₹50k, 1 month expenses) | Savings Account |
+| **L1** | Tax-Efficient Liquid Reserve — units aged 12+ months for 0% LTCG | 6 months expenses | Arbitrage Fund (15%+ bracket) or Liquid Fund (lower brackets) |
+| **L2** | Goal-Based Savings — money parked for specific planned goals | Sum of specific goals | Based on timeline: 1-2yr → Arbitrage, 2-3yr → Equity Savings, 3-5yr → Balanced Advantage |
+| **L3** | Long-Term Wealth — never touch until retirement | All remaining surplus | Equity SIPs (Large Cap + Flexi Cap + Mid/Small Cap) |
 
 **Key Rule:** Money only flows to next level when current level is full.
+
+**How L0 + L1 work together:**
+- Most payments: L0 cash or Credit Card
+- Credit card billing cycle gives you 30-45 days
+- During this time, redeem L1 units (that are already 12+ months old)
+- Result: Tax-free redemption (LTCG under ₹1.25L = 0%)
+
+**L1 is NOT a traditional "emergency fund":**
+- Medical emergencies → Health Insurance (prerequisite, not L1)
+- L1 is simply a **tax-efficient second savings layer** with aged units ready for redemption
+- The "emergency" framing is misleading — it's really about tax-optimized liquidity
 
 **L2 is Goal-Based:** If user has no specific goals, L2 = ₹0 and money goes directly to L3.
 
@@ -128,7 +151,7 @@ The system has **two phases**:
 - **ISR Calculator:** Monthly expense → Required corpus (with adjustable ISR)
 - **SIP Calculator:** With annual step-up option (year-by-year calculation)
 - **Lump Sum Calculator:** One-time investment growth
-- **Emergency Fund Calculator:** Expenses × months → L0/L1 split
+- **L0 + L1 Calculator:** Expenses × months → Liquid reserve split
 - **Time to Goal Calculator:** Goal amount → Years needed
 
 ### 6. 📋 Rules Tab
@@ -220,6 +243,47 @@ smart-wealth-system/
 ├── CLAUDE.md           # This file (dev context)
 └── LICENSE             # MIT recommended
 ```
+
+---
+
+## Git Commit Conventions
+
+This project uses **Conventional Commits** (https://www.conventionalcommits.org/en/v1.0.0/)
+
+### Format
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Types
+- **feat**: New feature
+- **fix**: Bug fix
+- **docs**: Documentation changes
+- **style**: Code style changes (formatting, no logic change)
+- **refactor**: Code refactoring (no feature or bug fix)
+- **perf**: Performance improvements
+- **test**: Add or update tests
+- **chore**: Build process, dependencies, tooling
+
+### Examples
+```
+feat: add inflation adjustment to retirement calculator
+fix: correct LTCG calculation for arbitrage funds
+docs: update tax slabs for FY 2026-27
+refactor: split CSS into separate file
+chore: add localStorage for goal persistence
+```
+
+### Rules
+- Use lowercase for type and description
+- Keep description concise (50 chars or less)
+- Use imperative mood ("add" not "added")
+- No period at the end of description
+- Never mention authorship in commits
 
 ---
 
